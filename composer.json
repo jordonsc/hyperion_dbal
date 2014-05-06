@@ -1,0 +1,28 @@
+{
+    "name": "hyperion/dbal",
+    "type": "library",
+    "description": "Hyperion DBAL and API client",
+    "autoload": {
+        "psr-0": { "": ["src/", "tests/"] }
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "eloquent/enumeration": "~5.1",
+        "guzzle/guzzle": "~3.9",
+        "jms/serializer": "~0.16",
+        "psr/log": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=4.0.0"
+    },
+    "scripts": {
+        "post-install-cmd": [
+        ],
+        "post-update-cmd": [
+        ]
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
+ 
