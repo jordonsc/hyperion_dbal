@@ -2,10 +2,16 @@
 
 namespace Hyperion\Dbal;
 
+use Hyperion\Dbal\Collection\EntityCollection;
 use Hyperion\Dbal\Driver\DriverInterface;
 use Hyperion\Dbal\Entity\HyperionEntity;
 use Hyperion\Dbal\Enum\Entity;
 
+/**
+ * The DataManager acts as an entity manager for all Hyperion data assets
+ *
+ * While this largely wraps the implemented DriverInterface, it does minor manipulation to the data, too
+ */
 class DataManager
 {
 
@@ -22,11 +28,11 @@ class DataManager
     /**
      * Create a new entity
      *
-     * @param HyperionEntity $entity
+     * @param HyperionEntity $entity This will be updated with any changes during persistence
      */
-    public function create(HyperionEntity $entity)
+    public function create(HyperionEntity &$entity)
     {
-        return $this->driver->create($entity);
+        return $entity = $this->driver->create($entity);
     }
 
     /**
@@ -43,11 +49,11 @@ class DataManager
     /**
      * Update an entity
      *
-     * @param HyperionEntity $entity
+     * @param HyperionEntity $entity This will be updated with any changes during persistence
      */
-    public function update(HyperionEntity $entity)
+    public function update(HyperionEntity &$entity)
     {
-        return $this->driver->update($entity);
+        return $entity = $this->driver->update($entity);
     }
 
     /**
@@ -59,5 +65,18 @@ class DataManager
     {
         return $this->driver->delete($entity);
     }
+
+    /**
+     * Get an collection of entities
+     *
+     * @param Entity $entity
+     * @param array  $criteria
+     * @return EntityCollection
+     */
+    public function search(Entity $entity, $criteria)
+    {
+        return $this->driver->search($entity, $criteria);
+    }
+
 
 } 

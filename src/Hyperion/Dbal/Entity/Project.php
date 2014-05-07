@@ -6,6 +6,26 @@ use JMS\Serializer\Annotation as Serializer;
 
 class Project extends HyperionEntity
 {
+    /**
+     * Get the primary key of the project
+     *
+     * @return int
+     */
+    public function getPrimaryKey()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * Set the primary key of the project
+     *
+     * @param int $pk
+     * @return $this
+     */
+    public function setPrimaryKey($pk)
+    {
+        return $this->setId($pk);
+    }
 
     /**
      * @Serializer\Type("integer")
