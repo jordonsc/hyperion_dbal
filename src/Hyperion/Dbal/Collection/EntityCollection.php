@@ -1,5 +1,4 @@
 <?php
-namespace Hyperion\Dbal\Collection;
 
 namespace Hyperion\Dbal\Collection;
 

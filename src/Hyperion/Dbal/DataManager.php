@@ -2,6 +2,7 @@
 
 namespace Hyperion\Dbal;
 
+use Hyperion\Dbal\Collection\CriteriaCollection;
 use Hyperion\Dbal\Collection\EntityCollection;
 use Hyperion\Dbal\Driver\DriverInterface;
 use Hyperion\Dbal\Entity\HyperionEntity;
@@ -69,11 +70,11 @@ class DataManager
     /**
      * Get an collection of entities
      *
-     * @param Entity $entity
-     * @param array  $criteria
+     * @param Entity             $entity
+     * @param CriteriaCollection $criteria
      * @return EntityCollection
      */
-    public function search(Entity $entity, $criteria)
+    public function search(Entity $entity, CriteriaCollection $criteria = null)
     {
         return $this->driver->search($entity, $criteria);
     }

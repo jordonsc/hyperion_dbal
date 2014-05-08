@@ -5,13 +5,13 @@ use Guzzle\Http\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 use Guzzle\Http\Exception\ServerErrorResponseException;
 use Guzzle\Http\Message\Response;
-use Guzzle\Inflection\Inflector;
+use Hyperion\Dbal\Collection\CriteriaCollection;
 use Hyperion\Dbal\Collection\EntityCollection;
 use Hyperion\Dbal\Entity\HyperionEntity;
 use Hyperion\Dbal\Enum\Entity;
 use Hyperion\Dbal\Exception\BadDataException;
-use Hyperion\Dbal\Exception\RequestException;
 use Hyperion\Dbal\Exception\NotFoundException;
+use Hyperion\Dbal\Exception\RequestException;
 use Hyperion\Dbal\Exception\UnexpectedResponseException;
 use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Type;
@@ -60,19 +60,23 @@ class ApiDriver implements DriverInterface
     /**
      * Make an API call
      *
-     * @param string         $method
-     * @param string         $uri
-     * @param string[]       $headers
-     * @param HyperionEntity $payload
-     * @param string         $deserialise_object
+     * @param string   $method
+     * @param string   $uri
+     * @param string[] $headers
+     * @param object   $payload
+     * @param string   $deserialise_object
      * @return Response|mixed
      * @throws RequestException
      * @throws NotFoundException
      */
-    protected function call($method, $uri, HyperionEntity $payload = null, $deserialise_object = null)
+    protected function call($method, $uri, $payload = null, $deserialise_object = null)
     {
         // Serialisation
-        $data_payload = $this->serialise($payload);
+        if (is_object($payload)) {
+            $data_payload = $this->serialise($payload);
+        } else {
+            $data_payload = $payload;
+        }
 
         // API call
         try {
@@ -109,19 +113,19 @@ class ApiDriver implements DriverInterface
     /**
      * Serialise the entity
      *
-     * @param HyperionEntity $obj
-     * @param bool           $remove_pk
+     * @param object $obj
+     * @param bool   $remove_pk Remove the primary key value from serialisation if the object is a HyperionEntity
      * @return string
      * @throws BadDataException
      */
-    protected function serialise(HyperionEntity $obj = null, $remove_pk = true)
+    protected function serialise($obj = null, $remove_pk = true)
     {
         if (!$obj) {
             return null;
         }
 
         $pk = null;
-        if ($remove_pk) {
+        if ($remove_pk && ($obj instanceof HyperionEntity)) {
             $pk = $obj->getPrimaryKey();
             $obj->setPrimaryKey(null);
         }
@@ -132,7 +136,7 @@ class ApiDriver implements DriverInterface
             throw new BadDataException("Unable to serialise payload", 0, $e);
         }
 
-        if ($remove_pk) {
+        if ($remove_pk && ($obj instanceof HyperionEntity)) {
             $obj->setPrimaryKey($pk);
         }
 
@@ -220,16 +224,16 @@ class ApiDriver implements DriverInterface
     /**
      * Get an collection of entities
      *
-     * @param Entity $entity
-     * @param array  $criteria
+     * @param Entity             $entity
+     * @param CriteriaCollection $criteria
      * @return EntityCollection
      */
-    public function search(Entity $entity, $criteria)
+    public function search(Entity $entity, CriteriaCollection $criteria = null)
     {
         $r = $this->call(
             'GET',
             call_user_func($entity->value().'::getPluralName'),
-            json_encode($criteria),
+            $criteria ? $criteria->getItems() : null,
             'ArrayCollection<'.$entity->value().'>'
         );
 
