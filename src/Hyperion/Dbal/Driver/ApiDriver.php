@@ -24,10 +24,13 @@ class ApiDriver implements DriverInterface
     const API_HOSTNAME = 'api.hyperion.dev';
     const API_FORMAT   = 'json';
 
+    protected $api_hostname;
     protected $serializer = null;
 
-    public function __construct()
+    public function __construct($hostname = null)
     {
+        $this->api_hostname = $hostname ?: self::API_HOSTNAME;
+
         // This forces the class to be auto-loaded, so that the doctrine annotation loader doesn't fail
         new Type;
         new Accessor;
@@ -40,7 +43,7 @@ class ApiDriver implements DriverInterface
      */
     protected function getClient()
     {
-        return new Client('http://'.self::API_HOSTNAME);
+        return new Client('http://'.$this->api_hostname);
     }
 
     /**
@@ -240,5 +243,4 @@ class ApiDriver implements DriverInterface
         return new EntityCollection($r);
     }
 
-
-} 
+}

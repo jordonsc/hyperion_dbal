@@ -96,7 +96,7 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
             CriteriaCollection::build()->add('name', 'Criteria Test A%', Comparison::LIKE())
         );
 
-        $this->assertCount(1, $projects->count());
+        $this->assertEquals(1, $projects->count());
 
         /** @var Project $project */
         $project = $projects[0];
