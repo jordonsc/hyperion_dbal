@@ -84,4 +84,11 @@ class EntityCollection implements \IteratorAggregate
     public function count() {
         return count($this->items);
     }
+
+    /**
+     * @return HyperionEntity
+     */
+    public function current() {
+        return $this->getIterator()->current();
+    }
 }

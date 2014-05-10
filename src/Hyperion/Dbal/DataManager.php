@@ -68,6 +68,17 @@ class DataManager
     }
 
     /**
+     * Get all entities
+     *
+     * @param Entity             $entity
+     * @return EntityCollection
+     */
+    public function retrieveAll(Entity $entity)
+    {
+        return $this->driver->retrieveAll($entity);
+    }
+
+    /**
      * Get an collection of entities
      *
      * @param Entity             $entity

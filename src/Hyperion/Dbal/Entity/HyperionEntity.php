@@ -19,7 +19,8 @@ abstract class HyperionEntity
     abstract public function setPrimaryKey($pk);
 
     public static function getSingularName() {
-        return array_pop(explode('\\', strtolower(get_called_class())));
+        $a = explode('\\', strtolower(get_called_class()));
+        return array_pop($a);
     }
 
     public static function getPluralName() {

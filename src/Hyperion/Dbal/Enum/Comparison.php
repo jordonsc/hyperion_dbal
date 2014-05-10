@@ -12,12 +12,6 @@ use Eloquent\Enumeration\AbstractEnumeration;
  * @method static Comparison GTE()
  * @method static Comparison LT()
  * @method static Comparison LTE()
- * @method static Comparison NULL()
- * @method static Comparison NOT_NULL()
- * @method static Comparison BETWEEN()
- * @method static Comparison NOT_BETWEEN()
- * @method static Comparison IN()
- * @method static Comparison NOT_IN()
  */
 class Comparison extends AbstractEnumeration
 {
@@ -29,10 +23,4 @@ class Comparison extends AbstractEnumeration
     const GTE         = '>=';
     const LT          = '<';
     const LTE         = '<=';
-    const NULL        = 'IS NULL';
-    const NOT_NULL    = 'IS NOT NULL';
-    const BETWEEN     = 'BETWEEN';
-    const NOT_BETWEEN = 'NOT BETWEEN';
-    const IN          = 'IN';
-    const NOT_IN      = 'NOT IN';
 }

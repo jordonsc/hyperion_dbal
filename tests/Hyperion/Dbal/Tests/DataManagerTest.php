@@ -59,8 +59,8 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($project->getId(), $mod_project->getId());
         $this->assertEquals($project->getName(), $mod_project->getName());
 
-        // SEARCH (ALL)
-        $projects = $manager->search(Entity::PROJECT());
+        // RETRIEVE ALL
+        $projects = $manager->retrieveAll(Entity::PROJECT());
         $this->assertGreaterThan(0, $projects->count());
 
         // DELETE
@@ -68,7 +68,7 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
             $manager->delete($item);
         }
 
-        $projects = $manager->search(Entity::PROJECT());
+        $projects = $manager->retrieveAll(Entity::PROJECT());
         $this->assertEquals(0, $projects->count());
 
     }
@@ -99,7 +99,7 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $projects->count());
 
         /** @var Project $project */
-        $project = $projects[0];
+        $project = $projects->current();
 
         $this->assertTrue($project instanceof Project);
 

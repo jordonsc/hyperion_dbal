@@ -75,7 +75,7 @@ class ApiDriver implements DriverInterface
     protected function call($method, $uri, $payload = null, $deserialise_object = null)
     {
         // Serialisation
-        if (is_object($payload)) {
+        if (is_array($payload) || is_object($payload)) {
             $data_payload = $this->serialise($payload);
         } else {
             $data_payload = $payload;
@@ -123,7 +123,7 @@ class ApiDriver implements DriverInterface
      */
     protected function serialise($obj = null, $remove_pk = true)
     {
-        if (!$obj) {
+        if (is_null($obj)) {
             return null;
         }
 
@@ -234,9 +234,27 @@ class ApiDriver implements DriverInterface
     public function search(Entity $entity, CriteriaCollection $criteria = null)
     {
         $r = $this->call(
+            'POST',
+            call_user_func($entity->value().'::getSingularName').'/search',
+            $criteria ? $criteria->getItems() : null,
+            'ArrayCollection<'.$entity->value().'>'
+        );
+
+        return new EntityCollection($r);
+    }
+
+    /**
+     * Get all entities
+     *
+     * @param Entity             $entity
+     * @return EntityCollection
+     */
+    public function retrieveAll(Entity $entity)
+    {
+        $r = $this->call(
             'GET',
             call_user_func($entity->value().'::getPluralName'),
-            $criteria ? $criteria->getItems() : null,
+            null,
             'ArrayCollection<'.$entity->value().'>'
         );
 

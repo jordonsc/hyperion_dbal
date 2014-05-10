@@ -50,4 +50,12 @@ interface DriverInterface
      */
     public function search(Entity $entity, CriteriaCollection $criteria = null);
 
+    /**
+     * Get all entities
+     *
+     * @param Entity             $entity
+     * @return EntityCollection
+     */
+    public function retrieveAll(Entity $entity);
+
 }
