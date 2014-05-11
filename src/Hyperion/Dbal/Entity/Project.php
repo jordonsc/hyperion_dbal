@@ -1,6 +1,8 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\BakeStatus;
+use Hyperion\Dbal\Enum\Packager;
 use JMS\Serializer\Annotation as Serializer;
 
 class Project extends HyperionEntity
@@ -93,6 +95,14 @@ class Project extends HyperionEntity
 
     // --
 
+    function __construct()
+    {
+        $this->setBakeStatus(BakeStatus::UNBAKED());
+        $this->setPackages([]);
+        $this->setServices([]);
+    }
+
+
     /**
      * Set AccountId
      *
@@ -118,23 +128,23 @@ class Project extends HyperionEntity
     /**
      * Set BakeStatus
      *
-     * @param int $bake_status
+     * @param BakeStatus $bake_status
      * @return $this
      */
-    public function setBakeStatus($bake_status)
+    public function setBakeStatus(BakeStatus $bake_status)
     {
-        $this->bake_status = $bake_status;
+        $this->bake_status = $bake_status->value();
         return $this;
     }
 
     /**
      * Get BakeStatus
      *
-     * @return int
+     * @return BakeStatus
      */
     public function getBakeStatus()
     {
-        return $this->bake_status;
+        return BakeStatus::memberByValue($this->bake_status);
     }
 
     /**
@@ -184,45 +194,45 @@ class Project extends HyperionEntity
     /**
      * Set Packager
      *
-     * @param int $packager
+     * @param Packager $packager
      * @return $this
      */
-    public function setPackager($packager)
+    public function setPackager(Packager $packager)
     {
-        $this->packager = $packager;
+        $this->packager = $packager->value();
         return $this;
     }
 
     /**
      * Get Packager
      *
-     * @return int
+     * @return Packager
      */
     public function getPackager()
     {
-        return $this->packager;
+        return Packager::memberByValue($this->packager);
     }
 
     /**
      * Set Packages
      *
-     * @param string $packages
+     * @param string[] $packages
      * @return $this
      */
-    public function setPackages($packages)
+    public function setPackages(array $packages)
     {
-        $this->packages = $packages;
+        $this->packages = json_encode($packages);
         return $this;
     }
 
     /**
      * Get Packages
      *
-     * @return string
+     * @return string[]
      */
     public function getPackages()
     {
-        return $this->packages;
+        return json_decode($this->packages);
     }
 
     /**
@@ -294,23 +304,23 @@ class Project extends HyperionEntity
     /**
      * Set Services
      *
-     * @param string $services
+     * @param string[] $services
      * @return $this
      */
-    public function setServices($services)
+    public function setServices(array $services)
     {
-        $this->services = $services;
+        $this->services = json_encode($services);
         return $this;
     }
 
     /**
      * Get Services
      *
-     * @return string
+     * @return string[]
      */
     public function getServices()
     {
-        return $this->services;
+        return json_decode($this->services);
     }
 
     /**
@@ -382,23 +392,23 @@ class Project extends HyperionEntity
     /**
      * Set UpdateSystemPackages
      *
-     * @param int $update_system_packages
+     * @param bool $update_system_packages
      * @return $this
      */
     public function setUpdateSystemPackages($update_system_packages)
     {
-        $this->update_system_packages = $update_system_packages;
+        $this->update_system_packages = $update_system_packages ? 1 : 0;
         return $this;
     }
 
     /**
      * Get UpdateSystemPackages
      *
-     * @return int
+     * @return bool
      */
     public function getUpdateSystemPackages()
     {
-        return $this->update_system_packages;
+        return $this->update_system_packages == 1;
     }
 
 }

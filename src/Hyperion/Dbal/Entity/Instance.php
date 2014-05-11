@@ -1,6 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\InstanceState;
 use JMS\Serializer\Annotation as Serializer;
 
 class Instance extends HyperionEntity
@@ -99,23 +100,23 @@ class Instance extends HyperionEntity
     /**
      * Set State
      *
-     * @param int $state
+     * @param InstanceState $state
      * @return $this
      */
-    public function setState($state)
+    public function setState(InstanceState $state)
     {
-        $this->state = $state;
+        $this->state = $state->value();
         return $this;
     }
 
     /**
      * Get State
      *
-     * @return int
+     * @return InstanceState
      */
     public function getState()
     {
-        return $this->state;
+        return InstanceState::memberByValue($this->state);
     }
 
 }

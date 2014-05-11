@@ -129,8 +129,8 @@ class ApiDriver implements DriverInterface
 
         $pk = null;
         if ($remove_pk && ($obj instanceof HyperionEntity)) {
-            $pk = $obj->getPrimaryKey();
-            $obj->setPrimaryKey(null);
+            $pk = $obj->getId();
+            $obj->setId(null);
         }
 
         try {
@@ -140,7 +140,7 @@ class ApiDriver implements DriverInterface
         }
 
         if ($remove_pk && ($obj instanceof HyperionEntity)) {
-            $obj->setPrimaryKey($pk);
+            $obj->setId($pk);
         }
 
         return $payload;
@@ -173,7 +173,7 @@ class ApiDriver implements DriverInterface
     {
         return $this->call(
             'POST',
-            $entity::getEntityName(),
+            $entity::getEntityName().'/new',
             $entity,
             'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
         );
@@ -208,7 +208,7 @@ class ApiDriver implements DriverInterface
     {
         return $this->call(
             'PUT',
-            $entity::getEntityName().'/'.$entity->getPrimaryKey(),
+            $entity::getEntityName().'/'.$entity->getId(),
             $entity,
             'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
         );
@@ -221,7 +221,7 @@ class ApiDriver implements DriverInterface
      */
     public function delete(HyperionEntity $entity)
     {
-        $this->call('DELETE', $entity::getEntityName().'/'.$entity->getPrimaryKey());
+        $this->call('DELETE', $entity::getEntityName().'/'.$entity->getId());
     }
 
     /**
@@ -253,7 +253,7 @@ class ApiDriver implements DriverInterface
     {
         $r = $this->call(
             'GET',
-            call_user_func($entity->value().'::getPluralName'),
+            call_user_func($entity->value().'::getEntityName').'/all',
             null,
             'ArrayCollection<'.$entity->value().'>'
         );

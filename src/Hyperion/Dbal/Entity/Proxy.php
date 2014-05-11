@@ -1,6 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\ProxyType;
 use JMS\Serializer\Annotation as Serializer;
 
 class Proxy extends HyperionEntity
@@ -134,23 +135,23 @@ class Proxy extends HyperionEntity
     /**
      * Set Type
      *
-     * @param int $type
+     * @param ProxyType $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(ProxyType $type)
     {
-        $this->type = $type;
+        $this->type = $type->value();
         return $this;
     }
 
     /**
      * Get Type
      *
-     * @return int
+     * @return ProxyType
      */
     public function getType()
     {
-        return $this->type;
+        return ProxyType::memberByValue($this->type);
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\DistributionStatus;
 use JMS\Serializer\Annotation as Serializer;
 
 class Distribution extends HyperionEntity
@@ -72,23 +73,23 @@ class Distribution extends HyperionEntity
     /**
      * Set Status
      *
-     * @param int $status
+     * @param DistributionStatus $status
      * @return $this
      */
-    public function setStatus($status)
+    public function setStatus(DistributionStatus $status)
     {
-        $this->status = $status;
+        $this->status = $status->value();
         return $this;
     }
 
     /**
      * Get Status
      *
-     * @return int
+     * @return DistributionStatus
      */
     public function getStatus()
     {
-        return $this->status;
+        return DistributionStatus::memberByValue($this->status);
     }
 
 }

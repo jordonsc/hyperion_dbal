@@ -1,6 +1,8 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\ActionState;
+use Hyperion\Dbal\Enum\ActionType;
 use JMS\Serializer\Annotation as Serializer;
 
 class Action extends HyperionEntity
@@ -34,23 +36,23 @@ class Action extends HyperionEntity
     /**
      * Set ActionType
      *
-     * @param int $action_type
+     * @param ActionType $action_type
      * @return $this
      */
-    public function setActionType($action_type)
+    public function setActionType(ActionType $action_type)
     {
-        $this->action_type = $action_type;
+        $this->action_type = $action_type->value();
         return $this;
     }
 
     /**
      * Get ActionType
      *
-     * @return int
+     * @return ActionType
      */
     public function getActionType()
     {
-        return $this->action_type;
+        return ActionType::memberByValue($this->action_type);
     }
 
     /**
@@ -100,23 +102,23 @@ class Action extends HyperionEntity
     /**
      * Set State
      *
-     * @param int $state
+     * @param ActionState $state
      * @return $this
      */
-    public function setState($state)
+    public function setState(ActionState $state)
     {
-        $this->state = $state;
+        $this->state = $state->value();
         return $this;
     }
 
     /**
      * Get State
      *
-     * @return int
+     * @return ActionState
      */
     public function getState()
     {
-        return $this->state;
+        return ActionState::memberByValue($this->state);
     }
 
 }

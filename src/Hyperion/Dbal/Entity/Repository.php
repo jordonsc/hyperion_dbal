@@ -1,6 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\RepositoryType;
 use JMS\Serializer\Annotation as Serializer;
 
 class Repository extends HyperionEntity
@@ -168,23 +169,23 @@ class Repository extends HyperionEntity
     /**
      * Set Type
      *
-     * @param int $type
+     * @param RepositoryType $type
      * @return $this
      */
-    public function setType($type)
+    public function setType(RepositoryType $type)
     {
-        $this->type = $type;
+        $this->type = $type->value();
         return $this;
     }
 
     /**
      * Get Type
      *
-     * @return int
+     * @return RepositoryType
      */
     public function getType()
     {
-        return $this->type;
+        return RepositoryType::memberByValue($this->type);
     }
 
     /**

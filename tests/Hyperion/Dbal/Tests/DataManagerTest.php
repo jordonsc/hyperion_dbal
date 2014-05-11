@@ -7,6 +7,7 @@ use Hyperion\Dbal\Driver\ApiDriver;
 use Hyperion\Dbal\Entity\Project;
 use Hyperion\Dbal\Enum\Comparison;
 use Hyperion\Dbal\Enum\Entity;
+use Hyperion\Dbal\Enum\Packager;
 
 class DataManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,13 +22,10 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCrud()
     {
-        $test_name = "Data Manager Test #".rand(100, 999);
+        $test_name     = "Data Manager Test #".rand(100, 999);
         $test_name_mod = "Data Manager Test #".rand(100, 999).' - modified';
-
-        $entity = new Project();
-        $entity->setName($test_name);
-
-        $manager = $this->getManager();
+        $manager       = $this->getManager();
+        $entity        = $this->createProject($test_name);
 
         // CREATE
         /** @var $project Project */
@@ -81,11 +79,8 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
         $name_a = "Criteria Test A ".rand(100, 999);
         $name_b = "Criteria Test B ".rand(100, 999);
 
-        $project_a = new Project();
-        $project_a->setName($name_a);
-
-        $project_b = new Project();
-        $project_b->setName($name_b);
+        $project_a = $this->createProject($name_a);
+        $project_b = $this->createProject($name_b);
 
         $manager = $this->getManager();
         $manager->create($project_a);
@@ -108,6 +103,23 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Create a new sample Project
+     *
+     * @param string $name
+     * @return Project
+     */
+    protected function createProject($name)
+    {
+        $entity = new Project();
+        $entity->setName($name);
+        $entity->setSourceImageId('i-fake');
+        $entity->setPackager(Packager::YUM());
+        $entity->setUpdateSystemPackages(true);
+        $entity->setPackages(['httpd', 'php']);
+        $entity->setServices(['httpd']);
+        return $entity;
+    }
 
 }
  

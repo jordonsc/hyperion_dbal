@@ -1,6 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\Provider;
 use JMS\Serializer\Annotation as Serializer;
 
 class Credential extends HyperionEntity
@@ -15,7 +16,7 @@ class Credential extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $provider_id;
+    protected $provider;
 
     /**
      * @Serializer\Type("string")
@@ -82,28 +83,6 @@ class Credential extends HyperionEntity
     }
 
     /**
-     * Set ProviderId
-     *
-     * @param int $provider_id
-     * @return $this
-     */
-    public function setProviderId($provider_id)
-    {
-        $this->provider_id = $provider_id;
-        return $this;
-    }
-
-    /**
-     * Get ProviderId
-     *
-     * @return int
-     */
-    public function getProviderId()
-    {
-        return $this->provider_id;
-    }
-
-    /**
      * Set Region
      *
      * @param string $region
@@ -145,6 +124,28 @@ class Credential extends HyperionEntity
     public function getSecret()
     {
         return $this->secret;
+    }
+
+    /**
+     * Set Provider
+     *
+     * @param Provider $provider
+     * @return $this
+     */
+    public function setProvider(Provider $provider)
+    {
+        $this->provider = $provider->value();
+        return $this;
+    }
+
+    /**
+     * Get Provider
+     *
+     * @return Provider
+     */
+    public function getProvider()
+    {
+        return Provider::memberByValue($this->provider);
     }
 
 }

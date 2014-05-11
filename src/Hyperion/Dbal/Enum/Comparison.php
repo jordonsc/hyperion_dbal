@@ -13,7 +13,7 @@ use Eloquent\Enumeration\AbstractEnumeration;
  * @method static Comparison LT()
  * @method static Comparison LTE()
  */
-class Comparison extends AbstractEnumeration
+final class Comparison extends AbstractEnumeration
 {
     const EQUALS      = '=';
     const NOT_EQUALS  = '!=';
