@@ -173,9 +173,9 @@ class ApiDriver implements DriverInterface
     {
         return $this->call(
             'POST',
-            $entity::getSingularName(),
+            $entity::getEntityName(),
             $entity,
-            'Hyperion\Dbal\Entity\\'.$entity::getSingularName()
+            'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
         );
     }
 
@@ -188,7 +188,7 @@ class ApiDriver implements DriverInterface
      */
     public function retrieve(Entity $entity, $id)
     {
-        $entity_name = call_user_func($entity->value().'::getSingularName');
+        $entity_name = call_user_func($entity->value().'::getEntityName');
 
         return $this->call(
             'GET',
@@ -208,9 +208,9 @@ class ApiDriver implements DriverInterface
     {
         return $this->call(
             'PUT',
-            $entity::getSingularName().'/'.$entity->getPrimaryKey(),
+            $entity::getEntityName().'/'.$entity->getPrimaryKey(),
             $entity,
-            'Hyperion\Dbal\Entity\\'.$entity::getSingularName()
+            'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
         );
     }
 
@@ -221,7 +221,7 @@ class ApiDriver implements DriverInterface
      */
     public function delete(HyperionEntity $entity)
     {
-        $this->call('DELETE', $entity::getSingularName().'/'.$entity->getPrimaryKey());
+        $this->call('DELETE', $entity::getEntityName().'/'.$entity->getPrimaryKey());
     }
 
     /**
@@ -235,7 +235,7 @@ class ApiDriver implements DriverInterface
     {
         $r = $this->call(
             'POST',
-            call_user_func($entity->value().'::getSingularName').'/search',
+            call_user_func($entity->value().'::getEntityName').'/search',
             $criteria ? $criteria->getItems() : null,
             'ArrayCollection<'.$entity->value().'>'
         );

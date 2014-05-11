@@ -1,30 +1,47 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use JMS\Serializer\Annotation as Serializer;
+
 abstract class HyperionEntity
 {
     /**
-     * Get the primary key of the entity
-     *
-     * @return mixed
+     * @Serializer\Type("integer")
+     * @var int
      */
-    abstract public function getPrimaryKey();
+    protected $id;
 
     /**
-     * Set the primary key of the entity
+     * Set the entities ID
      *
-     * @param mixed $pk
+     * @param int $id
      * @return $this
      */
-    abstract public function setPrimaryKey($pk);
-
-    public static function getSingularName() {
-        $a = explode('\\', strtolower(get_called_class()));
-        return array_pop($a);
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
-    public static function getPluralName() {
-        return static::getSingularName().'s';
+    /**
+     * Get the entities ID
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get the entity name of this class
+     *
+     * @return string
+     */
+    public static function getEntityName()
+    {
+        $a = explode('\\', strtolower(get_called_class()));
+        return array_pop($a);
     }
 
 } 
