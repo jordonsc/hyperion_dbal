@@ -1,7 +1,7 @@
 <?php
-namespace Hyperion\ApiBundle\Entity;
+namespace Hyperion\Dbal\Entity;
 
-use Hyperion\Dbal\Entity\HyperionEntity;
+use JMS\Serializer\Annotation as Serializer;
 
 class Instance extends HyperionEntity
 {
