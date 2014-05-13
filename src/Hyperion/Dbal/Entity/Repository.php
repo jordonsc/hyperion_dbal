@@ -10,7 +10,7 @@ class Repository extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $account_id;
+    protected $account;
 
     /**
      * @Serializer\Type("integer")
@@ -57,25 +57,25 @@ class Repository extends HyperionEntity
     // --
 
     /**
-     * Set AccountId
+     * Set Account
      *
-     * @param int $account_id
+     * @param int $account
      * @return $this
      */
-    public function setAccountId($account_id)
+    public function setAccount($account)
     {
-        $this->account_id = $account_id;
+        $this->account = $account;
         return $this;
     }
 
     /**
-     * Get AccountId
+     * Get Account
      *
      * @return int
      */
-    public function getAccountId()
+    public function getAccount()
     {
-        return $this->account_id;
+        return $this->account;
     }
 
     /**

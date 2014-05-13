@@ -10,7 +10,7 @@ class Proxy extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $account_id;
+    protected $account;
 
     /**
      * @Serializer\Type("integer")
@@ -43,28 +43,6 @@ class Proxy extends HyperionEntity
     protected $password;
 
     // --
-
-    /**
-     * Set AccountId
-     *
-     * @param int $account_id
-     * @return $this
-     */
-    public function setAccountId($account_id)
-    {
-        $this->account_id = $account_id;
-        return $this;
-    }
-
-    /**
-     * Get AccountId
-     *
-     * @return int
-     */
-    public function getAccountId()
-    {
-        return $this->account_id;
-    }
 
     /**
      * Set Hostname
@@ -174,6 +152,28 @@ class Proxy extends HyperionEntity
     public function getUsername()
     {
         return $this->username;
+    }
+
+    /**
+     * Set Account
+     *
+     * @param int $account
+     * @return $this
+     */
+    public function setAccount($account)
+    {
+        $this->account = $account;
+        return $this;
+    }
+
+    /**
+     * Get Account
+     *
+     * @return int
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 
 }

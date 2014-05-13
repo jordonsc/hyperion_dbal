@@ -16,7 +16,7 @@ class Distribution extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $project_id;
+    protected $project;
 
     /**
      * @Serializer\Type("integer")
@@ -49,28 +49,6 @@ class Distribution extends HyperionEntity
     }
 
     /**
-     * Set ProjectId
-     *
-     * @param int $project_id
-     * @return $this
-     */
-    public function setProjectId($project_id)
-    {
-        $this->project_id = $project_id;
-        return $this;
-    }
-
-    /**
-     * Get ProjectId
-     *
-     * @return int
-     */
-    public function getProjectId()
-    {
-        return $this->project_id;
-    }
-
-    /**
      * Set Status
      *
      * @param DistributionStatus $status
@@ -90,6 +68,28 @@ class Distribution extends HyperionEntity
     public function getStatus()
     {
         return DistributionStatus::memberByValue($this->status);
+    }
+
+    /**
+     * Set Project
+     *
+     * @param int $project
+     * @return $this
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * Get Project
+     *
+     * @return int
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 
 }

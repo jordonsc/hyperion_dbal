@@ -17,7 +17,7 @@ class Project extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $account_id;
+    protected $account;
 
     /**
      * @Serializer\Type("integer")
@@ -32,8 +32,8 @@ class Project extends HyperionEntity
     protected $baked_image_id;
 
     /**
-     * @Serializer\Type("integer")
-     * @var int
+     * @Serializer\Type("string")
+     * @var string
      */
     protected $source_image_id;
 
@@ -52,6 +52,7 @@ class Project extends HyperionEntity
     /**
      * JSON array
      * @Serializer\Type("string")
+     *
      * @var string
      */
     protected $packages;
@@ -65,6 +66,7 @@ class Project extends HyperionEntity
     /**
      * JSON array
      * @Serializer\Type("string")
+     *
      * @var string
      */
     protected $services;
@@ -73,25 +75,25 @@ class Project extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $prod_proxy_id;
+    protected $prod_proxy;
 
     /**
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $test_proxy_id;
+    protected $test_proxy;
 
     /**
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $prod_credential_id;
+    protected $prod_credential;
 
     /**
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $test_credential_id;
+    protected $test_credential;
 
     // --
 
@@ -100,29 +102,6 @@ class Project extends HyperionEntity
         $this->setBakeStatus(BakeStatus::UNBAKED());
         $this->setPackages([]);
         $this->setServices([]);
-    }
-
-
-    /**
-     * Set AccountId
-     *
-     * @param int $account_id
-     * @return $this
-     */
-    public function setAccountId($account_id)
-    {
-        $this->account_id = $account_id;
-        return $this;
-    }
-
-    /**
-     * Get AccountId
-     *
-     * @return int
-     */
-    public function getAccountId()
-    {
-        return $this->account_id;
     }
 
     /**
@@ -236,50 +215,6 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set ProdCredentialId
-     *
-     * @param int $prod_credential_id
-     * @return $this
-     */
-    public function setProdCredentialId($prod_credential_id)
-    {
-        $this->prod_credential_id = $prod_credential_id;
-        return $this;
-    }
-
-    /**
-     * Get ProdCredentialId
-     *
-     * @return int
-     */
-    public function getProdCredentialId()
-    {
-        return $this->prod_credential_id;
-    }
-
-    /**
-     * Set ProdProxyId
-     *
-     * @param int $prod_proxy_id
-     * @return $this
-     */
-    public function setProdProxyId($prod_proxy_id)
-    {
-        $this->prod_proxy_id = $prod_proxy_id;
-        return $this;
-    }
-
-    /**
-     * Get ProdProxyId
-     *
-     * @return int
-     */
-    public function getProdProxyId()
-    {
-        return $this->prod_proxy_id;
-    }
-
-    /**
      * Set Script
      *
      * @param string $script
@@ -346,50 +281,6 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set TestCredentialId
-     *
-     * @param int $test_credential_id
-     * @return $this
-     */
-    public function setTestCredentialId($test_credential_id)
-    {
-        $this->test_credential_id = $test_credential_id;
-        return $this;
-    }
-
-    /**
-     * Get TestCredentialId
-     *
-     * @return int
-     */
-    public function getTestCredentialId()
-    {
-        return $this->test_credential_id;
-    }
-
-    /**
-     * Set TestProxyId
-     *
-     * @param int $test_proxy_id
-     * @return $this
-     */
-    public function setTestProxyId($test_proxy_id)
-    {
-        $this->test_proxy_id = $test_proxy_id;
-        return $this;
-    }
-
-    /**
-     * Get TestProxyId
-     *
-     * @return int
-     */
-    public function getTestProxyId()
-    {
-        return $this->test_proxy_id;
-    }
-
-    /**
      * Set UpdateSystemPackages
      *
      * @param bool $update_system_packages
@@ -409,6 +300,126 @@ class Project extends HyperionEntity
     public function getUpdateSystemPackages()
     {
         return $this->update_system_packages == 1;
+    }
+
+    /**
+     * Set Account
+     *
+     * @param int $account
+     * @return $this
+     */
+    public function setAccount($account)
+    {
+        if (is_string($account)) {
+            $obj = json_decode($account);
+            $account = $obj->id;
+        }
+
+        $this->account = $account;
+        return $this;
+    }
+
+    public function setAccountId($account)
+    {
+        return $this->setAccount($account);
+    }
+
+    /**
+     * Get Account
+     *
+     * @return int
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Set ProdCredential
+     *
+     * @param Credential $prod_credential
+     * @return $this
+     */
+    public function setProdCredential($prod_credential)
+    {
+        $this->prod_credential = $prod_credential;
+        return $this;
+    }
+
+    /**
+     * Get ProdCredential
+     *
+     * @return Credential
+     */
+    public function getProdCredential()
+    {
+        return $this->prod_credential;
+    }
+
+    /**
+     * Set ProdProxy
+     *
+     * @param Proxy $prod_proxy
+     * @return $this
+     */
+    public function setProdProxy($prod_proxy)
+    {
+        $this->prod_proxy = $prod_proxy;
+        return $this;
+    }
+
+    /**
+     * Get ProdProxy
+     *
+     * @return Proxy
+     */
+    public function getProdProxy()
+    {
+        return $this->prod_proxy;
+    }
+
+    /**
+     * Set TestCredential
+     *
+     * @param Credential $test_credential
+     * @return $this
+     */
+    public function setTestCredential($test_credential)
+    {
+        $this->test_credential = $test_credential;
+        return $this;
+    }
+
+    /**
+     * Get TestCredential
+     *
+     * @return Credential
+     */
+    public function getTestCredential()
+    {
+        return $this->test_credential;
+    }
+
+    /**
+     * Set TestProxy
+     *
+     * @param Proxy $test_proxy
+     * @return $this
+     */
+    public function setTestProxy($test_proxy)
+    {
+        $this->test_proxy = $test_proxy;
+        return $this;
+    }
+
+    /**
+     * Get TestProxy
+     *
+     * @return Proxy
+     */
+    public function getTestProxy()
+    {
+        return $this->test_proxy;
     }
 
 }

@@ -21,7 +21,7 @@ class Instance extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $distribution_id;
+    protected $distribution;
 
     /**
      * @Serializer\Type("integer")
@@ -32,25 +32,25 @@ class Instance extends HyperionEntity
     // --
 
     /**
-     * Set DistributionId
+     * Set Distribution
      *
-     * @param int $distribution_id
+     * @param int $distribution
      * @return $this
      */
-    public function setDistributionId($distribution_id)
+    public function setDistribution($distribution)
     {
-        $this->distribution_id = $distribution_id;
+        $this->distribution = $distribution;
         return $this;
     }
 
     /**
-     * Get DistributionId
+     * Get Distribution
      *
      * @return int
      */
-    public function getDistributionId()
+    public function getDistribution()
     {
-        return $this->distribution_id;
+        return $this->distribution;
     }
 
     /**

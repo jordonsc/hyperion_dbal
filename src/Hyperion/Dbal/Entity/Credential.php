@@ -10,7 +10,7 @@ class Credential extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $account_id;
+    protected $account;
 
     /**
      * @Serializer\Type("integer")
@@ -37,28 +37,6 @@ class Credential extends HyperionEntity
     protected $region;
 
     // --
-
-    /**
-     * Set AccountId
-     *
-     * @param int $account_id
-     * @return $this
-     */
-    public function setAccountId($account_id)
-    {
-        $this->account_id = $account_id;
-        return $this;
-    }
-
-    /**
-     * Get AccountId
-     *
-     * @return int
-     */
-    public function getAccountId()
-    {
-        return $this->account_id;
-    }
 
     /**
      * Set Key
@@ -147,5 +125,28 @@ class Credential extends HyperionEntity
     {
         return Provider::memberByValue($this->provider);
     }
+
+    /**
+     * Set Account
+     *
+     * @param int $account
+     * @return $this
+     */
+    public function setAccount($account)
+    {
+        $this->account = $account;
+        return $this;
+    }
+
+    /**
+     * Get Account
+     *
+     * @return int
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
 
 }

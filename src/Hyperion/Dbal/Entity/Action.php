@@ -23,13 +23,13 @@ class Action extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $project_id;
+    protected $project;
 
     /**
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $distribution_id;
+    protected $distribution;
 
     // --
 
@@ -55,49 +55,6 @@ class Action extends HyperionEntity
         return ActionType::memberByValue($this->action_type);
     }
 
-    /**
-     * Set DistributionId
-     *
-     * @param int $distribution_id
-     * @return $this
-     */
-    public function setDistributionId($distribution_id)
-    {
-        $this->distribution_id = $distribution_id;
-        return $this;
-    }
-
-    /**
-     * Get DistributionId
-     *
-     * @return int
-     */
-    public function getDistributionId()
-    {
-        return $this->distribution_id;
-    }
-
-    /**
-     * Set ProjectId
-     *
-     * @param int $project_id
-     * @return $this
-     */
-    public function setProjectId($project_id)
-    {
-        $this->project_id = $project_id;
-        return $this;
-    }
-
-    /**
-     * Get ProjectId
-     *
-     * @return int
-     */
-    public function getProjectId()
-    {
-        return $this->project_id;
-    }
 
     /**
      * Set State
@@ -119,6 +76,50 @@ class Action extends HyperionEntity
     public function getState()
     {
         return ActionState::memberByValue($this->state);
+    }
+
+    /**
+     * Set Distribution
+     *
+     * @param int $distribution
+     * @return $this
+     */
+    public function setDistribution($distribution)
+    {
+        $this->distribution = $distribution;
+        return $this;
+    }
+
+    /**
+     * Get Distribution
+     *
+     * @return int
+     */
+    public function getDistribution()
+    {
+        return $this->distribution;
+    }
+
+    /**
+     * Set Project
+     *
+     * @param int $project
+     * @return $this
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * Get Project
+     *
+     * @return int
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 
 }
