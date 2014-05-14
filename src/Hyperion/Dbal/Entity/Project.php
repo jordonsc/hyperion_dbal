@@ -310,18 +310,8 @@ class Project extends HyperionEntity
      */
     public function setAccount($account)
     {
-        if (is_string($account)) {
-            $obj = json_decode($account);
-            $account = $obj->id;
-        }
-
         $this->account = $account;
         return $this;
-    }
-
-    public function setAccountId($account)
-    {
-        return $this->setAccount($account);
     }
 
     /**

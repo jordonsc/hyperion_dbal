@@ -4,6 +4,7 @@ namespace Hyperion\Dbal\Tests;
 use Hyperion\Dbal\Collection\CriteriaCollection;
 use Hyperion\Dbal\DataManager;
 use Hyperion\Dbal\Driver\ApiDriver;
+use Hyperion\Dbal\Entity\Account;
 use Hyperion\Dbal\Entity\Project;
 use Hyperion\Dbal\Enum\Comparison;
 use Hyperion\Dbal\Enum\Entity;
@@ -25,9 +26,14 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
         $test_name     = "Data Manager Test #".rand(100, 999);
         $test_name_mod = "Data Manager Test #".rand(100, 999).' - modified';
         $manager       = $this->getManager();
-        $entity        = $this->createProject($test_name);
+
 
         // CREATE
+        /** @var $account Account */
+        $account = $manager->create($this->createAccount($test_name." - Account"));
+        $entity  = $this->createProject($test_name);
+        $entity->setAccount($account->getId());
+
         /** @var $project Project */
         $project = $manager->create($entity);
 
@@ -76,13 +82,20 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCriteria()
     {
+        $manager = $this->getManager();
+
+        $account = $this->createAccount("Criteria Account ".rand(100, 999));
+        $manager->create($account);
+
         $name_a = "Criteria Test A ".rand(100, 999);
         $name_b = "Criteria Test B ".rand(100, 999);
 
         $project_a = $this->createProject($name_a);
-        $project_b = $this->createProject($name_b);
+        $project_a->setAccount($account->getId());
 
-        $manager = $this->getManager();
+        $project_b = $this->createProject($name_b);
+        $project_b->setAccount($account->getId());
+
         $manager->create($project_a);
         $manager->create($project_b);
 
@@ -101,6 +114,19 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($name_a, $project->getName());
         $this->assertEquals($project_a->getId(), $project->getId());
 
+    }
+
+    /**
+     * Create a new sample Account
+     *
+     * @param string $name
+     * @return Account
+     */
+    protected function createAccount($name)
+    {
+        $entity = new Account();
+        $entity->setName($name);
+        return $entity;
     }
 
     /**
