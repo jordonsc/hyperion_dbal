@@ -6,7 +6,7 @@ use Hyperion\Dbal\Collection\EntityCollection;
 use Hyperion\Dbal\Entity\HyperionEntity;
 use Hyperion\Dbal\Enum\Entity;
 
-interface DriverInterface
+interface DataDriverInterface
 {
 
     /**

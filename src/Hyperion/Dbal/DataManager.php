@@ -4,24 +4,22 @@ namespace Hyperion\Dbal;
 
 use Hyperion\Dbal\Collection\CriteriaCollection;
 use Hyperion\Dbal\Collection\EntityCollection;
-use Hyperion\Dbal\Driver\DriverInterface;
+use Hyperion\Dbal\Driver\DataDriverInterface;
 use Hyperion\Dbal\Entity\HyperionEntity;
 use Hyperion\Dbal\Enum\Entity;
 
 /**
  * The DataManager acts as an entity manager for all Hyperion data assets
- *
- * While this largely wraps the implemented DriverInterface, it does minor manipulation to the data, too
  */
 class DataManager
 {
 
     /**
-     * @var DriverInterface
+     * @var DataDriverInterface
      */
     protected $driver;
 
-    function __construct(DriverInterface $driver)
+    function __construct(DataDriverInterface $driver)
     {
         $this->driver = $driver;
     }

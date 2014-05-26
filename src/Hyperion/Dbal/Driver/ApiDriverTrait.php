@@ -5,10 +5,7 @@ use Guzzle\Http\Client;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 use Guzzle\Http\Exception\ServerErrorResponseException;
 use Guzzle\Http\Message\Response;
-use Hyperion\Dbal\Collection\CriteriaCollection;
-use Hyperion\Dbal\Collection\EntityCollection;
 use Hyperion\Dbal\Entity\HyperionEntity;
-use Hyperion\Dbal\Enum\Entity;
 use Hyperion\Dbal\Exception\BadDataException;
 use Hyperion\Dbal\Exception\NotFoundException;
 use Hyperion\Dbal\Exception\RequestException;
@@ -18,18 +15,21 @@ use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 
-class ApiDriver implements DriverInterface
+/**
+ * Trait for all API driver implementations
+ */
+trait ApiDriverTrait
 {
-    const API_VERSION  = '/api/v1/';
-    const API_HOSTNAME = 'api.hyperion.dev';
-    const API_FORMAT   = 'json';
-
-    protected $api_hostname;
+    protected $api_hostname = 'api.hyperion.dev';
+    protected $api_version = '/api/v1/';
+    protected $api_format = 'json';
     protected $serializer = null;
 
     public function __construct($hostname = null)
     {
-        $this->api_hostname = $hostname ?: self::API_HOSTNAME;
+        if ($hostname) {
+            $this->api_hostname = $hostname;
+        }
 
         // This forces the class to be auto-loaded, so that the doctrine annotation loader doesn't fail
         new Type;
@@ -85,7 +85,7 @@ class ApiDriver implements DriverInterface
         try {
             $response = $this->getClient()->createRequest(
                 $method,
-                self::API_VERSION.$uri.'.'.self::API_FORMAT,
+                $this->api_version.$uri.'.'.$this->api_format,
                 null,
                 $data_payload
             )->send();
@@ -134,7 +134,7 @@ class ApiDriver implements DriverInterface
         }
 
         try {
-            $payload = $this->getSerialiser()->serialize($obj, self::API_FORMAT);
+            $payload = $this->getSerialiser()->serialize($obj, $this->api_format);
         } catch (\Exception $e) {
             throw new BadDataException("Unable to serialise payload", 0, $e);
         }
@@ -149,116 +149,19 @@ class ApiDriver implements DriverInterface
     /**
      * Deserialise the content into an object
      *
-     * @param string $deserialse_object Fully-qualified class name of the return object
+     * @param string $deserialise_object Fully-qualified class name of the return object
      * @param string $content
      * @return mixed
      * @throws UnexpectedResponseException
      */
-    protected function deserialise($deserialse_object, $content)
+    protected function deserialise($deserialise_object, $content)
     {
         try {
-            return $this->getSerialiser()->deserialize($content, $deserialse_object, self::API_FORMAT);
+            return $this->getSerialiser()->deserialize($content, $deserialise_object, $this->api_format);
         } catch (\Exception $e) {
             throw new UnexpectedResponseException("API server returned an unexpected response", 0, $e, $content);
         }
     }
 
-    /**
-     * Create a new entity
-     *
-     * @param HyperionEntity $entity
-     * @return HyperionEntity
-     */
-    public function create(HyperionEntity $entity)
-    {
-        return $this->call(
-            'POST',
-            $entity::getEntityName().'/new',
-            $entity,
-            'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
-        );
-    }
-
-    /**
-     * Get an entity by it's primary key
-     *
-     * @param Entity $entity
-     * @param mixed  $id
-     * @return HyperionEntity
-     */
-    public function retrieve(Entity $entity, $id)
-    {
-        $entity_name = call_user_func($entity->value().'::getEntityName');
-
-        return $this->call(
-            'GET',
-            $entity_name.'/'.$id,
-            null,
-            $entity->value()
-        );
-    }
-
-    /**
-     * Update an entity
-     *
-     * @param HyperionEntity $entity
-     * @return HyperionEntity
-     */
-    public function update(HyperionEntity $entity)
-    {
-        return $this->call(
-            'PUT',
-            $entity::getEntityName().'/'.$entity->getId(),
-            $entity,
-            'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
-        );
-    }
-
-    /**
-     * Delete an entity
-     *
-     * @param HyperionEntity $entity
-     */
-    public function delete(HyperionEntity $entity)
-    {
-        $this->call('DELETE', $entity::getEntityName().'/'.$entity->getId());
-    }
-
-    /**
-     * Get an collection of entities
-     *
-     * @param Entity             $entity
-     * @param CriteriaCollection $criteria
-     * @return EntityCollection
-     */
-    public function search(Entity $entity, CriteriaCollection $criteria = null)
-    {
-        $r = $this->call(
-            'POST',
-            call_user_func($entity->value().'::getEntityName').'/search',
-            $criteria ? $criteria->getItems() : null,
-            'ArrayCollection<'.$entity->value().'>'
-        );
-
-        return new EntityCollection($r);
-    }
-
-    /**
-     * Get all entities
-     *
-     * @param Entity             $entity
-     * @return EntityCollection
-     */
-    public function retrieveAll(Entity $entity)
-    {
-        $r = $this->call(
-            'GET',
-            call_user_func($entity->value().'::getEntityName').'/all',
-            null,
-            'ArrayCollection<'.$entity->value().'>'
-        );
-
-        return new EntityCollection($r);
-    }
-
 }
+ 

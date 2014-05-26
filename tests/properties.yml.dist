@@ -1,0 +1,6 @@
+account:
+    provider: AWS
+    access_key:
+    secret:
+    region: us-east1
+

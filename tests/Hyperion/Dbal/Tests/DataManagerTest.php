@@ -2,21 +2,13 @@
 namespace Hyperion\Dbal\Tests;
 
 use Hyperion\Dbal\Collection\CriteriaCollection;
-use Hyperion\Dbal\DataManager;
-use Hyperion\Dbal\Driver\ApiDriver;
 use Hyperion\Dbal\Entity\Account;
 use Hyperion\Dbal\Entity\Project;
 use Hyperion\Dbal\Enum\Comparison;
 use Hyperion\Dbal\Enum\Entity;
-use Hyperion\Dbal\Enum\Packager;
 
-class DataManagerTest extends \PHPUnit_Framework_TestCase
+class DataManagerTest extends TestBase
 {
-
-    protected function getManager()
-    {
-        return new DataManager(new ApiDriver());
-    }
 
     /**
      * @medium
@@ -25,13 +17,13 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
     {
         $test_name     = "Data Manager Test #".rand(100, 999);
         $test_name_mod = "Data Manager Test #".rand(100, 999).' - modified';
-        $manager       = $this->getManager();
-
+        $manager       = $this->getDataManager();
 
         // CREATE
         /** @var $account Account */
-        $account = $manager->create($this->createAccount($test_name." - Account"));
-        $entity  = $this->createProject($test_name);
+        $account = $this->createAccount($test_name." - Account");
+        $manager->create($account);
+        $entity = $this->createProject($test_name);
         $entity->setAccount($account->getId());
 
         /** @var $project Project */
@@ -82,7 +74,7 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCriteria()
     {
-        $manager = $this->getManager();
+        $manager = $this->getDataManager();
 
         $account = $this->createAccount("Criteria Account ".rand(100, 999));
         $manager->create($account);
@@ -114,37 +106,6 @@ class DataManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($name_a, $project->getName());
         $this->assertEquals($project_a->getId(), $project->getId());
 
-    }
-
-    /**
-     * Create a new sample Account
-     *
-     * @param string $name
-     * @return Account
-     */
-    protected function createAccount($name)
-    {
-        $entity = new Account();
-        $entity->setName($name);
-        return $entity;
-    }
-
-    /**
-     * Create a new sample Project
-     *
-     * @param string $name
-     * @return Project
-     */
-    protected function createProject($name)
-    {
-        $entity = new Project();
-        $entity->setName($name);
-        $entity->setSourceImageId('i-fake');
-        $entity->setPackager(Packager::YUM());
-        $entity->setUpdateSystemPackages(true);
-        $entity->setPackages(['httpd', 'php']);
-        $entity->setServices(['httpd']);
-        return $entity;
     }
 
 }

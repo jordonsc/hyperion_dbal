@@ -22,7 +22,7 @@ class Credential extends HyperionEntity
      * @Serializer\Type("string")
      * @var string
      */
-    protected $key;
+    protected $access_key;
 
     /**
      * @Serializer\Type("string")
@@ -39,25 +39,25 @@ class Credential extends HyperionEntity
     // --
 
     /**
-     * Set Key
+     * Set access key
      *
      * @param string $key
      * @return $this
      */
-    public function setKey($key)
+    public function setAccessKey($key)
     {
-        $this->key = $key;
+        $this->access_key = $key;
         return $this;
     }
 
     /**
-     * Get Key
+     * Get access key
      *
      * @return string
      */
-    public function getKey()
+    public function getAccessKey()
     {
-        return $this->key;
+        return $this->access_key;
     }
 
     /**
