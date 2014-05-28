@@ -119,4 +119,10 @@ class Instance extends HyperionEntity
         return InstanceState::memberByValue($this->state);
     }
 
+
+    public function __toString()
+    {
+        return $this->getInstanceId();
+    }
+
 }

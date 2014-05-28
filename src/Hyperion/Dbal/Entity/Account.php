@@ -38,4 +38,9 @@ class Account extends HyperionEntity
     }
 
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 }

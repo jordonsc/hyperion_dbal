@@ -44,4 +44,9 @@ abstract class HyperionEntity
         return array_pop($a);
     }
 
+    public function __toString()
+    {
+        return (string)$this->getId();
+    }
+
 } 

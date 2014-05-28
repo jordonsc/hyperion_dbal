@@ -232,4 +232,9 @@ class Repository extends HyperionEntity
         return $this->username;
     }
 
+    public function __toString()
+    {
+        return $this->getUrl();
+    }
+
 }

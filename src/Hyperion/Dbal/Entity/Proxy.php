@@ -176,4 +176,9 @@ class Proxy extends HyperionEntity
         return $this->account;
     }
 
+    public function __toString()
+    {
+        return $this->getHostname().":".$this->getPort();
+    }
+
 }

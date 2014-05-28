@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+umask(0000);
+set_time_limit(0);
+
+foreach ([__DIR__.'/../../autoload.php', __DIR__.'/vendor/autoload.php'] as $file) {
+    if (file_exists($file)) {
+        require $file;
+        break;
+    }
+}
+
+use Hyperion\Dbal\Console\DbalApplication;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(['--env', '-e'], 'dev');
+$debug = !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
+$conf_dir = $input->getParameterOption(['--config', '-c'], __DIR__.'/config/');
+
+$application = new DbalApplication($env, $debug, $conf_dir);
+$application->run($input);
