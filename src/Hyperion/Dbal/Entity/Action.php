@@ -31,6 +31,12 @@ class Action extends HyperionEntity
      */
     protected $distribution;
 
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $workflow_data;
+
     // --
 
     /**
@@ -54,7 +60,6 @@ class Action extends HyperionEntity
     {
         return ActionType::memberByValue($this->action_type);
     }
-
 
     /**
      * Set State
@@ -120,6 +125,28 @@ class Action extends HyperionEntity
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Set Workflow Data
+     *
+     * @param string $workflow_data
+     * @return $this
+     */
+    public function setWorkflowData($workflow_data)
+    {
+        $this->workflow_data = $workflow_data;
+        return $this;
+    }
+
+    /**
+     * Get Workflow Data
+     *
+     * @return string
+     */
+    public function getWorkflowData()
+    {
+        return $this->workflow_data;
     }
 
 }
