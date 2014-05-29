@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6e842c12ede637bc81855ea18a7b44c7",
+    "hash": "83836b1c0b7a0e70181116f492bdf430",
     "packages": [
         {
             "name": "bravo3/properties",

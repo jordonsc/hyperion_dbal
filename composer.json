@@ -25,7 +25,8 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "preferred-install": "dist"
     },
     "bin": ["hyperion"]
 }
