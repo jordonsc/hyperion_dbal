@@ -14,6 +14,6 @@ final class ActionType extends AbstractEnumeration
     const DEPLOY    = 0;
     const SCALE     = 1;
     const TEAR_DOWN = 2;
-    const BAKE      = 2;
+    const BAKE      = 3;
 }
  
