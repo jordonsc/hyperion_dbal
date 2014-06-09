@@ -327,7 +327,7 @@ class Project extends HyperionEntity
     /**
      * Set ProdCredential
      *
-     * @param Credential $prod_credential
+     * @param int $prod_credential
      * @return $this
      */
     public function setProdCredential($prod_credential)
@@ -339,7 +339,7 @@ class Project extends HyperionEntity
     /**
      * Get ProdCredential
      *
-     * @return Credential
+     * @return int
      */
     public function getProdCredential()
     {
@@ -349,7 +349,7 @@ class Project extends HyperionEntity
     /**
      * Set ProdProxy
      *
-     * @param Proxy $prod_proxy
+     * @param int $prod_proxy
      * @return $this
      */
     public function setProdProxy($prod_proxy)
@@ -361,7 +361,7 @@ class Project extends HyperionEntity
     /**
      * Get ProdProxy
      *
-     * @return Proxy
+     * @return int
      */
     public function getProdProxy()
     {
@@ -371,7 +371,7 @@ class Project extends HyperionEntity
     /**
      * Set TestCredential
      *
-     * @param Credential $test_credential
+     * @param int $test_credential
      * @return $this
      */
     public function setTestCredential($test_credential)
@@ -383,7 +383,7 @@ class Project extends HyperionEntity
     /**
      * Get TestCredential
      *
-     * @return Credential
+     * @return int
      */
     public function getTestCredential()
     {
@@ -393,7 +393,7 @@ class Project extends HyperionEntity
     /**
      * Set TestProxy
      *
-     * @param Proxy $test_proxy
+     * @param int $test_proxy
      * @return $this
      */
     public function setTestProxy($test_proxy)
@@ -405,7 +405,7 @@ class Project extends HyperionEntity
     /**
      * Get TestProxy
      *
-     * @return Proxy
+     * @return int
      */
     public function getTestProxy()
     {
