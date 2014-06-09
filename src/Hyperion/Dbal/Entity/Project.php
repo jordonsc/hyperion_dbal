@@ -81,7 +81,73 @@ class Project extends HyperionEntity
      * @Serializer\Type("string")
      * @var string
      */
+    protected $network_prod;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $network_test;
+
+    /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $keys_prod;
+
+    /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $keys_test;
+
+    /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $firewalls_prod;
+
+    /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $firewalls_test;
+
+    /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $tags_prod;
+
+    /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $tags_test;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
     protected $script;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $tenancy;
 
     /**
      * JSON array
@@ -498,6 +564,203 @@ class Project extends HyperionEntity
         return json_decode($this->zones);
     }
 
+    /**
+     * Set FirewallsProd
+     *
+     * @param string[] $firewalls_prod
+     * @return $this
+     */
+    public function setFirewallsProd($firewalls_prod)
+    {
+        $this->firewalls_prod = json_encode($firewalls_prod);
+        return $this;
+    }
+
+    /**
+     * Get FirewallsProd
+     *
+     * @return string[]
+     */
+    public function getFirewallsProd()
+    {
+        return json_decode($this->firewalls_prod);
+    }
+
+    /**
+     * Set FirewallsTest
+     *
+     * @param string[] $firewalls_test
+     * @return $this
+     */
+    public function setFirewallsTest($firewalls_test)
+    {
+        $this->firewalls_test = json_encode($firewalls_test);
+        return $this;
+    }
+
+    /**
+     * Get FirewallsTest
+     *
+     * @return string[]
+     */
+    public function getFirewallsTest()
+    {
+        return json_decode($this->firewalls_test);
+    }
+
+    /**
+     * Set production keys
+     *
+     * @param string[] $keys_prod
+     * @return $this
+     */
+    public function setKeysProd($keys_prod)
+    {
+        $this->keys_prod = json_encode($keys_prod);
+        return $this;
+    }
+
+    /**
+     * Get production keys
+     *
+     * @return string[]
+     */
+    public function getKeysProd()
+    {
+        return json_decode($this->keys_prod);
+    }
+
+    /**
+     * Set test keys
+     *
+     * @param string[] $keys_test
+     * @return $this
+     */
+    public function setKeysTest($keys_test)
+    {
+        $this->keys_test = json_encode($keys_test);
+        return $this;
+    }
+
+    /**
+     * Get test keys
+     *
+     * @return string[]
+     */
+    public function getKeysTest()
+    {
+        return json_decode($this->keys_test);
+    }
+
+    /**
+     * Set NetworkProd
+     *
+     * @param string $network_prod
+     * @return $this
+     */
+    public function setNetworkProd($network_prod)
+    {
+        $this->network_prod = $network_prod;
+        return $this;
+    }
+
+    /**
+     * Get NetworkProd
+     *
+     * @return string
+     */
+    public function getNetworkProd()
+    {
+        return $this->network_prod;
+    }
+
+    /**
+     * Set NetworkTest
+     *
+     * @param string $network_test
+     * @return $this
+     */
+    public function setNetworkTest($network_test)
+    {
+        $this->network_test = $network_test;
+        return $this;
+    }
+
+    /**
+     * Get NetworkTest
+     *
+     * @return string
+     */
+    public function getNetworkTest()
+    {
+        return $this->network_test;
+    }
+
+    /**
+     * Set tags for the production environment
+     *
+     * @param string[] $tags_prod
+     * @return $this
+     */
+    public function setTagsProd($tags_prod)
+    {
+        $this->tags_prod = json_encode($tags_prod);
+        return $this;
+    }
+
+    /**
+     * Get tags for the production environment
+     *
+     * @return string[]
+     */
+    public function getTagsProd()
+    {
+        return json_decode($this->tags_prod, true);
+    }
+
+    /**
+     * Set tags for the test environment
+     *
+     * @param string[] $tags_test
+     * @return $this
+     */
+    public function setTagsTest($tags_test)
+    {
+        $this->tags_test = json_encode($tags_test);
+        return $this;
+    }
+
+    /**
+     * Get tags for the test environment
+     *
+     * @return string[]
+     */
+    public function getTagsTest()
+    {
+        return json_decode($this->tags_test, true);
+    }
+
+    /**
+     * Set tenancy (eg VPC)
+     *
+     * @param string $tenancy
+     * @return $this
+     */
+    public function setTenancy($tenancy)
+    {
+        $this->tenancy = $tenancy;
+        return $this;
+    }
+
+    /**
+     * Get tenancy (eg VPC)
+     *
+     * @return string
+     */
+    public function getTenancy()
+    {
+        return $this->tenancy;
+    }
 
     public function __toString()
     {
