@@ -1,3 +1,4 @@
 !.gitkeep
 /bin/
 /vendor/
+/config/console-*.yml

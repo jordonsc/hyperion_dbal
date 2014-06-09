@@ -149,4 +149,9 @@ class Credential extends HyperionEntity
     }
 
 
+    public function __toString()
+    {
+        return $this->getProvider()->key().": ".$this->getRegion();
+    }
+
 }

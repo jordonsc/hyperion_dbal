@@ -412,4 +412,9 @@ class Project extends HyperionEntity
         return $this->test_proxy;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 }
