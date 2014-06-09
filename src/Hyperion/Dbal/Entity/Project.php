@@ -58,6 +58,26 @@ class Project extends HyperionEntity
     protected $packages;
 
     /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $zones;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $instance_size_prod;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $instance_size_test;
+
+    /**
      * @Serializer\Type("string")
      * @var string
      */
@@ -105,7 +125,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set BakeStatus
+     * Set if this application has been baked
      *
      * @param BakeStatus $bake_status
      * @return $this
@@ -117,7 +137,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get BakeStatus
+     * Check if this application has been baked
      *
      * @return BakeStatus
      */
@@ -127,7 +147,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set BakedImageId
+     * Set the ID of the baked image
      *
      * @param string $baked_image_id
      * @return $this
@@ -139,7 +159,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get BakedImageId
+     * Get the ID of the baked image
      *
      * @return string
      */
@@ -149,7 +169,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set Name
+     * Set the project name
      *
      * @param string $name
      * @return $this
@@ -161,7 +181,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get Name
+     * Get the project name
      *
      * @return string
      */
@@ -171,7 +191,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set Packager
+     * Set the packager type (apt, yum)
      *
      * @param Packager $packager
      * @return $this
@@ -183,7 +203,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get Packager
+     * Get the packager type (apt, yum)
      *
      * @return Packager
      */
@@ -193,7 +213,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set Packages
+     * Set system packages to be installed
      *
      * @param string[] $packages
      * @return $this
@@ -205,7 +225,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get Packages
+     * Get system packages to be installed
      *
      * @return string[]
      */
@@ -237,7 +257,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set Services
+     * Set system services to be launched
      *
      * @param string[] $services
      * @return $this
@@ -249,7 +269,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get Services
+     * Get system services to be launched
      *
      * @return string[]
      */
@@ -259,7 +279,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set SourceImageId
+     * Set the machine image ID the bakery should start with
      *
      * @param int $source_image_id
      * @return $this
@@ -271,7 +291,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get SourceImageId
+     * Get the machine image ID the bakery should start with
      *
      * @return int
      */
@@ -281,7 +301,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set UpdateSystemPackages
+     * Set if all installed system packages should be updated during baking
      *
      * @param bool $update_system_packages
      * @return $this
@@ -293,7 +313,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get UpdateSystemPackages
+     * Check if all installed system packages should be updated during baking
      *
      * @return bool
      */
@@ -303,7 +323,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set Account
+     * Set the account ID
      *
      * @param int $account
      * @return $this
@@ -315,7 +335,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get Account
+     * Get the account ID
      *
      * @return int
      */
@@ -325,7 +345,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set ProdCredential
+     * Set the production credential ID
      *
      * @param int $prod_credential
      * @return $this
@@ -337,7 +357,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get ProdCredential
+     * Get the production credential ID
      *
      * @return int
      */
@@ -347,7 +367,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set ProdProxy
+     * Set the production proxy ID
      *
      * @param int $prod_proxy
      * @return $this
@@ -359,7 +379,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get ProdProxy
+     * Get the production proxy ID
      *
      * @return int
      */
@@ -369,7 +389,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set TestCredential
+     * Set the test credential ID
      *
      * @param int $test_credential
      * @return $this
@@ -381,7 +401,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get TestCredential
+     * Get the test credential ID
      *
      * @return int
      */
@@ -391,7 +411,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Set TestProxy
+     * Set the test proxy ID
      *
      * @param int $test_proxy
      * @return $this
@@ -403,7 +423,7 @@ class Project extends HyperionEntity
     }
 
     /**
-     * Get TestProxy
+     * Get the test proxy ID
      *
      * @return int
      */
@@ -411,6 +431,73 @@ class Project extends HyperionEntity
     {
         return $this->test_proxy;
     }
+
+    /**
+     * Set the instance size for production environments
+     *
+     * @param string $instance_size_prod
+     * @return $this
+     */
+    public function setInstanceSizeProd($instance_size_prod)
+    {
+        $this->instance_size_prod = $instance_size_prod;
+        return $this;
+    }
+
+    /**
+     * Get the instance size for production environments
+     *
+     * @return string
+     */
+    public function getInstanceSizeProd()
+    {
+        return $this->instance_size_prod;
+    }
+
+    /**
+     * Set the instance size for test environments
+     *
+     * @param string $instance_size_test
+     * @return $this
+     */
+    public function setInstanceSizeTest($instance_size_test)
+    {
+        $this->instance_size_test = $instance_size_test;
+        return $this;
+    }
+
+    /**
+     * Get the instance size for test environments
+     *
+     * @return string
+     */
+    public function getInstanceSizeTest()
+    {
+        return $this->instance_size_test;
+    }
+
+    /**
+     * Set the zones this application will deploy in
+     *
+     * @param string[] $zones
+     * @return $this
+     */
+    public function setZones($zones)
+    {
+        $this->zones = json_encode($zones);
+        return $this;
+    }
+
+    /**
+     * Get the zones this application will deploy in
+     *
+     * @return string[]
+     */
+    public function getZones()
+    {
+        return json_decode($this->zones);
+    }
+
 
     public function __toString()
     {
