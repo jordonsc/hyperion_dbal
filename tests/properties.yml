@@ -2,4 +2,4 @@ account:
     provider: AWS
     access_key: AKIAIZCU7IKGKG6JOUNQ
     secret: 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
-    region: us-east1
+    region: ap-southeast-2

@@ -1,0 +1,33 @@
+account:
+    class: Account
+    fields:
+        name: Sample Account
+
+credentials:
+    class: Credential
+    fields:
+        provider: AWS
+        access_key: ...
+        secret: ...
+        region: ap-southeast-2
+        account: @account
+
+project:
+    class: Project
+    fields:
+        account: @account
+        name: Sample Project
+        source_image_id: ami-3b4bd301
+        packager: YUM
+        update_system_packages: true
+        packages: [httpd, php]
+        services: [httpd]
+        instance_size_prod: m1.medium
+        instance_size_test: m1.small
+        zones: [ap-southeast-2a, ap-southeast-2b]
+        firewalls_prod: [...]
+        firewalls_test: [...]
+        keys_prod: [...]
+        keys_test: [...]
+        tags_prod: {env: prod}
+        tags_test: {env: test}

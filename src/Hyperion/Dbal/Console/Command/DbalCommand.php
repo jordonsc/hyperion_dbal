@@ -115,11 +115,9 @@ class DbalCommand extends Command
         } elseif (is_bool($val)) {
             return '<bool>'.($val ? 'true' : 'false').'</bool>';
         } elseif (is_array($val)) {
-            $out = '';
+            $out = '[';
             foreach ($val as $sub_val) {
-                if (!$out) {
-                    $out = '[';
-                } else {
+                if (strlen($out) > 1) {
                     $out .= ', ';
                 }
                 $out .= $this->printValue($sub_val);
