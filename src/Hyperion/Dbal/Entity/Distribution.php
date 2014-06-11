@@ -16,7 +16,7 @@ class Distribution extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $project;
+    protected $environment;
 
     /**
      * @Serializer\Type("integer")
@@ -71,25 +71,26 @@ class Distribution extends HyperionEntity
     }
 
     /**
-     * Set Project
+     * Set Environment
      *
-     * @param int $project
+     * @param int $environment
      * @return $this
      */
-    public function setProject($project)
+    public function setEnvironment($environment)
     {
-        $this->project = $project;
+        $this->environment = $environment;
         return $this;
     }
 
     /**
-     * Get Project
+     * Get Environment
      *
      * @return int
      */
-    public function getProject()
+    public function getEnvironment()
     {
-        return $this->project;
+        return $this->environment;
     }
+
 
 }
