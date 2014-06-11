@@ -2,6 +2,7 @@
 namespace Hyperion\Dbal\Console;
 
 use Bravo3\Properties\Conf;
+use Hyperion\Dbal\Console\Command\Entity\EntityBuildCommand;
 use Hyperion\Dbal\Console\Command\Entity\EntityCreateCommand;
 use Hyperion\Dbal\Console\Command\Entity\EntityListCommand;
 use Hyperion\Dbal\Console\Command\Entity\EntityRetrieveCommand;
@@ -53,9 +54,10 @@ class DbalApplication extends Application
 
 
         // Entity commands
-        $this->add(new EntityCreateCommand());
+        //$this->add(new EntityCreateCommand());
         $this->add(new EntityRetrieveCommand());
         $this->add(new EntityListCommand());
+        $this->add(new EntityBuildCommand());
 
         // Stack action commands
 
