@@ -60,15 +60,7 @@ abstract class TestBase extends \PHPUnit_Framework_TestCase
         $entity->setUpdateSystemPackages(true);
         $entity->setPackages(['httpd', 'php']);
         $entity->setServices(['httpd']);
-        $entity->setInstanceSizeProd('m1.medium');
-        $entity->setInstanceSizeTest('m1.small');
         $entity->setZones(['ap-southeast-2a', 'ap-southeast-2b']);
-        $entity->setFirewallsProd([]);
-        $entity->setFirewallsTest([]);
-        $entity->setKeysProd([]);
-        $entity->setKeysTest([]);
-        $entity->setTagsProd([]);
-        $entity->setTagsTest([]);
         return $entity;
     }
 

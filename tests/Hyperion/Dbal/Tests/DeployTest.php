@@ -20,8 +20,6 @@ class DeployTest extends TestBase
         $creds->setAccount($account->getId());
 
         $manager->create($creds);
-        $project->setProdCredential($creds->getId());
-
         $manager->create($project);
 
 
