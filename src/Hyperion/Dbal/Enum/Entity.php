@@ -6,6 +6,7 @@ use Eloquent\Enumeration\AbstractEnumeration;
 /**
  * @method static entity ACCOUNT()
  * @method static entity PROJECT()
+ * @method static entity ENVIRONMENT()
  * @method static entity ACTION()
  * @method static entity DISTRIBUTION()
  * @method static entity INSTANCE()
@@ -17,6 +18,7 @@ final class Entity extends AbstractEnumeration
 {
     const ACCOUNT      = 'Hyperion\Dbal\Entity\Account';
     const PROJECT      = 'Hyperion\Dbal\Entity\Project';
+    const ENVIRONMENT  = 'Hyperion\Dbal\Entity\Environment';
     const ACTION       = 'Hyperion\Dbal\Entity\Action';
     const DISTRIBUTION = 'Hyperion\Dbal\Entity\Distribution';
     const INSTANCE     = 'Hyperion\Dbal\Entity\Instance';

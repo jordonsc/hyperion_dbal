@@ -6,6 +6,7 @@ use Hyperion\Dbal\Collection\CriteriaCollection;
 use Hyperion\Dbal\Collection\EntityCollection;
 use Hyperion\Dbal\Driver\DataDriverInterface;
 use Hyperion\Dbal\Driver\StackDriverInterface;
+use Hyperion\Dbal\Entity\Environment;
 use Hyperion\Dbal\Entity\HyperionEntity;
 use Hyperion\Dbal\Entity\Project;
 use Hyperion\Dbal\Enum\Entity;
@@ -26,20 +27,54 @@ class StackManager
         $this->driver = $driver;
     }
 
-    public function bake(Project $project)
+    /**
+     * Bake a project using given environment
+     *
+     * @param Environment $env
+     */
+    public function bake(Environment $env)
     {
 
     }
 
-    public function deploy(Project $project) {
+    /**
+     * Perform a CI build
+     *
+     * @param Environment $env
+     */
+    public function build(Environment $env)
+    {
 
     }
 
-    public function scale(Project $project, $delta) {
+    /**
+     * Release/deploy a project
+     *
+     * @param Environment $env
+     */
+    public function deploy(Environment $env)
+    {
 
     }
 
-    public function tearDown(Project $project) {
+    /**
+     * Horizontally scale a deployed project
+     *
+     * @param Environment $env
+     * @param int         $delta
+     */
+    public function scale(Environment $env, $delta)
+    {
+
+    }
+
+    /**
+     * Completely tear-down a project
+     *
+     * @param Environment $env
+     */
+    public function tearDown(Environment $env)
+    {
 
     }
 

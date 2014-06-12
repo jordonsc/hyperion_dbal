@@ -2,6 +2,7 @@
 namespace Hyperion\Dbal\Entity;
 
 use Hyperion\Dbal\Enum\EnvironmentType;
+use Hyperion\Dbal\Enum\Tenancy;
 use JMS\Serializer\Annotation as Serializer;
 
 class Environment extends HyperionEntity
@@ -78,6 +79,11 @@ class Environment extends HyperionEntity
      */
     protected $proxy;
 
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $script;
 
     // --
 
@@ -176,7 +182,7 @@ class Environment extends HyperionEntity
      * @param string[] $key_pairs
      * @return $this
      */
-    public function setKeys(array $key_pairs)
+    public function setKeyPairs(array $key_pairs)
     {
         $this->key_pairs = json_encode($key_pairs);
         return $this;
@@ -305,23 +311,45 @@ class Environment extends HyperionEntity
     /**
      * Set Tenancy
      *
-     * @param int $tenancy
+     * @param Tenancy $tenancy
      * @return $this
      */
-    public function setTenancy($tenancy)
+    public function setTenancy(Tenancy $tenancy)
     {
-        $this->tenancy = $tenancy;
+        $this->tenancy = $tenancy->value();
         return $this;
     }
 
     /**
      * Get Tenancy
      *
-     * @return int
+     * @return Tenancy
      */
     public function getTenancy()
     {
-        return $this->tenancy;
+        return Tenancy::memberByValue($this->tenancy);
+    }
+
+    /**
+     * Set Script
+     *
+     * @param string $script
+     * @return $this
+     */
+    public function setScript($script)
+    {
+        $this->script = $script;
+        return $this;
+    }
+
+    /**
+     * Get Script
+     *
+     * @return string
+     */
+    public function getScript()
+    {
+        return $this->script;
     }
 
     public function __toString()

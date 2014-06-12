@@ -5,6 +5,7 @@ use Eloquent\Enumeration\AbstractEnumeration;
 use Guzzle\Inflection\Inflector;
 use Hyperion\Dbal\Console\DbalApplication;
 use Hyperion\Dbal\DataManager;
+use Hyperion\Dbal\StackManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,6 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DbalCommand extends Command
 {
     const DBAL_APP_ERR = "Application is not a DbalApplication";
+
+    private $data_manager = null;
+    private $stack_manager = null;
 
     /**
      * Get the application environment
@@ -67,26 +71,46 @@ class DbalCommand extends Command
     }
 
     /**
-     * Create a new DataManager
+     * Get the DataManager
      *
      * @return DataManager
      */
     protected function getDataManager()
     {
-        $class = new \ReflectionClass($this->getParameter('data_manager.driver'));
-        $driver = $class->newInstanceArgs($this->getParameter('data_manager.arguments', []));
+        if (!$this->data_manager) {
+            $class              = new \ReflectionClass($this->getParameter('data_manager.driver'));
+            $driver             = $class->newInstanceArgs($this->getParameter('data_manager.arguments', []));
+            $this->data_manager = new DataManager($driver);
+        }
 
-        return new DataManager($driver);
+        return $this->data_manager;
     }
 
-    protected function dumpObject($obj, OutputInterface $output) {
+    /**
+     * Get the StackManager
+     *
+     * @return StackManager
+     */
+    protected function getStackManager()
+    {
+        if (!$this->stack_manager) {
+            $class               = new \ReflectionClass($this->getParameter('stack_manager.driver'));
+            $driver              = $class->newInstanceArgs($this->getParameter('stack_manager.arguments', []));
+            $this->stack_manager = new StackManager($driver);
+        }
+
+        return $this->stack_manager;
+    }
+
+    protected function dumpObject($obj, OutputInterface $output)
+    {
         $output->getFormatter()->setStyle('string', new OutputFormatterStyle('red'));
         $output->getFormatter()->setStyle('number', new OutputFormatterStyle('yellow'));
         $output->getFormatter()->setStyle('bool', new OutputFormatterStyle('cyan'));
         $output->getFormatter()->setStyle('enum', new OutputFormatterStyle('green'));
         $output->getFormatter()->setStyle('null', new OutputFormatterStyle('blue'));
 
-        $r = new \ReflectionClass($obj);
+        $r       = new \ReflectionClass($obj);
         $max_len = 0;
         $props   = $r->getProperties();
 
@@ -96,7 +120,7 @@ class DbalCommand extends Command
 
         foreach ($props as $prop) {
 
-            $val = '-';
+            $val    = '-';
             $getter = 'get'.Inflector::getDefault()->camel($prop->getName());
 
             if ($r->hasMethod($getter)) {
@@ -107,7 +131,8 @@ class DbalCommand extends Command
         }
     }
 
-    private function printValue($val) {
+    private function printValue($val)
+    {
         if (is_string($val)) {
             return '<string>'.$val.'</string>';
         } elseif (is_numeric($val)) {

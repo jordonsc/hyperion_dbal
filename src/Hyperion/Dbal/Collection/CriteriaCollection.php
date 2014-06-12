@@ -8,7 +8,7 @@ class CriteriaCollection implements \IteratorAggregate
 {
     protected $items;
 
-    function __construct(array $items)
+    function __construct(array $items = [])
     {
         $this->items = $items;
     }

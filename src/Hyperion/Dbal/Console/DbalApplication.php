@@ -6,6 +6,8 @@ use Hyperion\Dbal\Console\Command\Entity\EntityBuildCommand;
 use Hyperion\Dbal\Console\Command\Entity\EntityCreateCommand;
 use Hyperion\Dbal\Console\Command\Entity\EntityListCommand;
 use Hyperion\Dbal\Console\Command\Entity\EntityRetrieveCommand;
+use Hyperion\Dbal\Console\Command\Project\ProjectBakeCommand;
+use Hyperion\Dbal\Console\Command\Project\ProjectDescribeCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -60,6 +62,8 @@ class DbalApplication extends Application
         $this->add(new EntityBuildCommand());
 
         // Stack action commands
+        $this->add(new ProjectDescribeCommand());
+        $this->add(new ProjectBakeCommand());
 
     }
 

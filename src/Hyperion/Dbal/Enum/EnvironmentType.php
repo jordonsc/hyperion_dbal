@@ -11,6 +11,6 @@ use Eloquent\Enumeration\AbstractEnumeration;
 class EnvironmentType extends AbstractEnumeration
 {
     const BAKERY     = 0;   // Baking only
-    const TEST       = 0;   // CI/UAT/SIT
-    const PRODUCTION = 1;   // Production, demo, staging
+    const TEST       = 1;   // CI/UAT/SIT
+    const PRODUCTION = 2;   // Production, demo, staging
 } 

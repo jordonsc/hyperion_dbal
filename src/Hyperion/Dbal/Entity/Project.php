@@ -69,7 +69,13 @@ class Project extends HyperionEntity
      * @Serializer\Type("string")
      * @var string
      */
-    protected $script;
+    protected $bake_script;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $launch_script;
 
     /**
      * JSON array
@@ -204,9 +210,9 @@ class Project extends HyperionEntity
      * @param string $script
      * @return $this
      */
-    public function setScript($script)
+    public function setBakeScript($script)
     {
-        $this->script = $script;
+        $this->bake_script = $script;
         return $this;
     }
 
@@ -215,9 +221,9 @@ class Project extends HyperionEntity
      *
      * @return string
      */
-    public function getScript()
+    public function getBakeScript()
     {
-        return $this->script;
+        return $this->bake_script;
     }
 
     /**
@@ -328,6 +334,28 @@ class Project extends HyperionEntity
     public function getZones()
     {
         return json_decode($this->zones);
+    }
+
+    /**
+     * Set LaunchScript
+     *
+     * @param string $launch_script
+     * @return $this
+     */
+    public function setLaunchScript($launch_script)
+    {
+        $this->launch_script = $launch_script;
+        return $this;
+    }
+
+    /**
+     * Get LaunchScript
+     *
+     * @return string
+     */
+    public function getLaunchScript()
+    {
+        return $this->launch_script;
     }
 
     public function __toString()
