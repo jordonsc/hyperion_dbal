@@ -95,7 +95,7 @@ trait ApiDriverTrait
             // 4xx errors
             $r = $e->getResponse();
             if ($r->getStatusCode() == 404) {
-                throw new NotFoundException($r->getMessage(), 404, $e);
+                throw new NotFoundException("Resource not found: ".$method." ".$uri, 404, $e);
             } else {
                 throw new RequestException($r->getMessage(), $r->getStatusCode(), $e);
             }
