@@ -23,7 +23,7 @@ class ApiDataDriver implements DataDriverInterface
     {
         return $this->call(
             'POST',
-            $entity::getEntityName().'/new',
+            $this->crud_prefix.$entity::getEntityName().'/new',
             $entity,
             'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
         );
@@ -42,7 +42,7 @@ class ApiDataDriver implements DataDriverInterface
 
         return $this->call(
             'GET',
-            $entity_name.'/'.$id,
+            $this->crud_prefix.$entity_name.'/'.$id,
             null,
             $entity->value()
         );
@@ -58,7 +58,7 @@ class ApiDataDriver implements DataDriverInterface
     {
         return $this->call(
             'PUT',
-            $entity::getEntityName().'/'.$entity->getId(),
+            $this->crud_prefix.$entity::getEntityName().'/'.$entity->getId(),
             $entity,
             'Hyperion\Dbal\Entity\\'.$entity::getEntityName()
         );
@@ -71,7 +71,7 @@ class ApiDataDriver implements DataDriverInterface
      */
     public function delete(HyperionEntity $entity)
     {
-        $this->call('DELETE', $entity::getEntityName().'/'.$entity->getId());
+        $this->call('DELETE', $this->crud_prefix.$entity::getEntityName().'/'.$entity->getId());
     }
 
     /**
@@ -85,7 +85,7 @@ class ApiDataDriver implements DataDriverInterface
     {
         $r = $this->call(
             'POST',
-            call_user_func($entity->value().'::getEntityName').'/search',
+            $this->crud_prefix.call_user_func($entity->value().'::getEntityName').'/search',
             $criteria ? $criteria->getItems() : null,
             'ArrayCollection<'.$entity->value().'>'
         );
@@ -103,7 +103,7 @@ class ApiDataDriver implements DataDriverInterface
     {
         $r = $this->call(
             'GET',
-            call_user_func($entity->value().'::getEntityName').'/all',
+            $this->crud_prefix.call_user_func($entity->value().'::getEntityName').'/all',
             null,
             'ArrayCollection<'.$entity->value().'>'
         );

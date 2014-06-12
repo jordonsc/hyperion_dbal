@@ -19,20 +19,9 @@ class ProjectBakeCommand extends DbalCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $dm = $this->getDataManager();
-        $env_id = (int)$input->getArgument('environment');
+        $report = $this->getStackManager()->bake($input->getArgument('environment'));
 
-        /** @var Environment $env */
-        $env = $dm->retrieve(Entity::PROJECT(), $env_id);
-
-        if (!$env) {
-            $output->writeln("Invalid environment");
-            return;
-        }
-
-        $this->getStackManager()->bake($env);
-
-        $output->writeln("Baking started");
+        $output->writeln("Baking started, action: <comment>".$report->getAction()."</comment>");
 
     }
 

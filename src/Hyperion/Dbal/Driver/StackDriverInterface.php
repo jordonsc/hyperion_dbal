@@ -1,17 +1,25 @@
 <?php
 namespace Hyperion\Dbal\Driver;
 
-use Hyperion\Dbal\Entity\Project;
+use Hyperion\Dbal\Reports\BakeReport;
 
 interface StackDriverInterface
 {
-    public function bake(Project $project);
+    /**
+     * Bake a project
+     *
+     * @param int $env
+     * @return BakeReport
+     */
+    public function bake($env);
 
-    public function deploy(Project $project);
+    public function build($env);
 
-    public function scale(Project $project, $delta);
+    public function deploy($env);
 
-    public function tearDown(Project $project);
+    public function scale($env, $delta);
+
+    public function tearDown($env);
 
     // TODO: add some status getters
 }

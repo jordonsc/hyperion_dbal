@@ -2,14 +2,9 @@
 
 namespace Hyperion\Dbal;
 
-use Hyperion\Dbal\Collection\CriteriaCollection;
-use Hyperion\Dbal\Collection\EntityCollection;
-use Hyperion\Dbal\Driver\DataDriverInterface;
 use Hyperion\Dbal\Driver\StackDriverInterface;
 use Hyperion\Dbal\Entity\Environment;
-use Hyperion\Dbal\Entity\HyperionEntity;
-use Hyperion\Dbal\Entity\Project;
-use Hyperion\Dbal\Enum\Entity;
+use Hyperion\Dbal\Reports\BakeReport;
 
 /**
  * The StackManager is responsible for controlling the application infrastructure stack
@@ -30,19 +25,20 @@ class StackManager
     /**
      * Bake a project using given environment
      *
-     * @param Environment $env
+     * @param int $env
+     * @return BakeReport
      */
-    public function bake(Environment $env)
+    public function bake($env)
     {
-
+        return $this->driver->bake($env);
     }
 
     /**
      * Perform a CI build
      *
-     * @param Environment $env
+     * @param int $env
      */
-    public function build(Environment $env)
+    public function build($env)
     {
 
     }
@@ -50,9 +46,9 @@ class StackManager
     /**
      * Release/deploy a project
      *
-     * @param Environment $env
+     * @param int $env
      */
-    public function deploy(Environment $env)
+    public function deploy($env)
     {
 
     }
@@ -60,10 +56,10 @@ class StackManager
     /**
      * Horizontally scale a deployed project
      *
-     * @param Environment $env
-     * @param int         $delta
+     * @param int $env
+     * @param int $delta
      */
-    public function scale(Environment $env, $delta)
+    public function scale($env, $delta)
     {
 
     }
@@ -71,7 +67,7 @@ class StackManager
     /**
      * Completely tear-down a project
      *
-     * @param Environment $env
+     * @param int $env
      */
     public function tearDown(Environment $env)
     {

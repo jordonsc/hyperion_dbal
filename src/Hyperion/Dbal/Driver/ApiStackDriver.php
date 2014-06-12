@@ -1,7 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Driver;
 
-use Hyperion\Dbal\Entity\Project;
+use Hyperion\Dbal\Reports\BakeReport;
 
 /**
  * API driver for stack management
@@ -10,22 +10,38 @@ class ApiStackDriver implements StackDriverInterface
 {
     use ApiDriverTrait;
 
-    public function bake(Project $project)
+    /**
+     * Bake a project
+     *
+     * @param int $env
+     * @return BakeReport
+     */
+    public function bake($env)
     {
-
+        return $this->call(
+            'GET',
+            'bake/'.(int)$env,
+            null,
+            'Hyperion\Dbal\Reports\BakeReport'
+        );
     }
 
-    public function deploy(Project $project)
+    public function build($env)
+    {
+        // TODO: Implement build() method.
+    }
+
+    public function deploy($env)
     {
         // TODO: Implement deploy() method.
     }
 
-    public function scale(Project $project, $delta)
+    public function scale($env, $delta)
     {
         // TODO: Implement scale() method.
     }
 
-    public function tearDown(Project $project)
+    public function tearDown($env)
     {
         // TODO: Implement tearDown() method.
     }

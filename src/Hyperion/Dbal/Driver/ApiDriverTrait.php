@@ -22,6 +22,7 @@ trait ApiDriverTrait
 {
     protected $api_hostname = 'api.hyperion.dev';
     protected $api_version = '/api/v1/';
+    protected $crud_prefix = 'entity/';
     protected $api_format = 'json';
     protected $serializer = null;
 
