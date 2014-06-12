@@ -23,6 +23,12 @@ class Action extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
+    protected $project;
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
     protected $environment;
 
     /**
@@ -103,6 +109,28 @@ class Action extends HyperionEntity
     public function getDistribution()
     {
         return $this->distribution;
+    }
+
+    /**
+     * Set Project
+     *
+     * @param int $project
+     * @return $this
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * Get Project
+     *
+     * @return int
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 
     /**
