@@ -6,6 +6,7 @@ use Hyperion\Dbal\Console\Command\DbalCommand;
 use Hyperion\Dbal\DataManager;
 use Hyperion\Dbal\Driver\ApiDataDriver;
 use Hyperion\Dbal\Entity\HyperionEntity;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,13 +18,13 @@ class EntityBuildCommand extends DbalCommand
     protected function configure()
     {
         $this->setName('entity:build')->setDescription('Build entities from a YAML file')
-            ->addOption('data', 'd', InputOption::VALUE_REQUIRED, 'Path to YAML config');
+            ->addArgument('data', InputArgument::REQUIRED, 'Path to YAML config');
     }
 
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $fn = $input->getOption('data');
+        $fn = $input->getArgument('data');
         $dm = new DataManager(new ApiDataDriver());
 
         if (!$fn) {
@@ -65,6 +66,9 @@ class EntityBuildCommand extends DbalCommand
                 if ($arg && $arg->isSubclassOf('Eloquent\Enumeration\AbstractEnumeration')) {
                     // Need to send an AbstractEnumeration
                     $value = call_user_func($arg->getName().'::memberByKey', $value);
+                } elseif (is_string($value) && ($value{0} == '!')) {
+                    // Pull value from a file
+                    $value = file_get_contents(substr($value, 1));
                 } elseif (is_string($value) && ($value{0} == '@')) {
                     // Need to send a reference to a previously created entity
                     $prev_entity = substr($value, 1);

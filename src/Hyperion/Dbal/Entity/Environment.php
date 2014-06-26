@@ -85,6 +85,30 @@ class Environment extends HyperionEntity
      */
     protected $script;
 
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
+    protected $ssh_port;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $ssh_user;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $ssh_password;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $ssh_pkey;
+
     // --
 
 
@@ -351,6 +375,95 @@ class Environment extends HyperionEntity
     {
         return $this->script;
     }
+
+    /**
+     * Set SshPassword
+     *
+     * @param string $ssh_password
+     * @return $this
+     */
+    public function setSshPassword($ssh_password)
+    {
+        $this->ssh_password = $ssh_password;
+        return $this;
+    }
+
+    /**
+     * Get SshPassword
+     *
+     * @return string
+     */
+    public function getSshPassword()
+    {
+        return $this->ssh_password;
+    }
+
+    /**
+     * Set SshPkey
+     *
+     * @param string $ssh_pkey
+     * @return $this
+     */
+    public function setSshPkey($ssh_pkey)
+    {
+        $this->ssh_pkey = $ssh_pkey;
+        return $this;
+    }
+
+    /**
+     * Get SshPkey
+     *
+     * @return string
+     */
+    public function getSshPkey()
+    {
+        return $this->ssh_pkey;
+    }
+
+    /**
+     * Set SshPort
+     *
+     * @param int $ssh_port
+     * @return $this
+     */
+    public function setSshPort($ssh_port)
+    {
+        $this->ssh_port = $ssh_port;
+        return $this;
+    }
+
+    /**
+     * Get SshPort
+     *
+     * @return int
+     */
+    public function getSshPort()
+    {
+        return $this->ssh_port;
+    }
+
+    /**
+     * Set SshUser
+     *
+     * @param string $ssh_user
+     * @return $this
+     */
+    public function setSshUser($ssh_user)
+    {
+        $this->ssh_user = $ssh_user;
+        return $this;
+    }
+
+    /**
+     * Get SshUser
+     *
+     * @return string
+     */
+    public function getSshUser()
+    {
+        return $this->ssh_user;
+    }
+
 
     public function __toString()
     {
