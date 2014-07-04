@@ -16,6 +16,12 @@ class Repository extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
+    protected $project;
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
     protected $type;
 
     /**
@@ -49,6 +55,18 @@ class Repository extends HyperionEntity
     protected $tag;
 
     /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $checkout_directory;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $host_fingerprint;
+
+    /**
      * @Serializer\Type("integer")
      * @var int
      */
@@ -76,6 +94,28 @@ class Repository extends HyperionEntity
     public function getAccount()
     {
         return $this->account;
+    }
+
+    /**
+     * Set Project
+     *
+     * @param int $project
+     * @return $this
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * Get Project
+     *
+     * @return int
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 
     /**
@@ -220,6 +260,50 @@ class Repository extends HyperionEntity
     {
         $this->username = $username;
         return $this;
+    }
+
+    /**
+     * Set CheckoutDirectory
+     *
+     * @param string $checkout_directory
+     * @return $this
+     */
+    public function setCheckoutDirectory($checkout_directory)
+    {
+        $this->checkout_directory = $checkout_directory;
+        return $this;
+    }
+
+    /**
+     * Get CheckoutDirectory
+     *
+     * @return string
+     */
+    public function getCheckoutDirectory()
+    {
+        return $this->checkout_directory;
+    }
+
+    /**
+     * Set HostFingerprint
+     *
+     * @param string $host_fingerprint
+     * @return $this
+     */
+    public function setHostFingerprint($host_fingerprint)
+    {
+        $this->host_fingerprint = $host_fingerprint;
+        return $this;
+    }
+
+    /**
+     * Get HostFingerprint
+     *
+     * @return string
+     */
+    public function getHostFingerprint()
+    {
+        return $this->host_fingerprint;
     }
 
     /**

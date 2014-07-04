@@ -41,7 +41,19 @@ class Action extends HyperionEntity
      * @Serializer\Type("string")
      * @var string
      */
-    protected $workflow_data;
+    protected $output;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $error_message;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $phase;
 
     // --
 
@@ -156,25 +168,69 @@ class Action extends HyperionEntity
     }
 
     /**
-     * Set Workflow Data
+     * Set ErrorMessage
      *
-     * @param string $workflow_data
+     * @param string $error_message
      * @return $this
      */
-    public function setWorkflowData($workflow_data)
+    public function setErrorMessage($error_message)
     {
-        $this->workflow_data = $workflow_data;
+        $this->error_message = $error_message;
         return $this;
     }
 
     /**
-     * Get Workflow Data
+     * Get ErrorMessage
      *
      * @return string
      */
-    public function getWorkflowData()
+    public function getErrorMessage()
     {
-        return $this->workflow_data;
+        return $this->error_message;
+    }
+
+    /**
+     * Set Output
+     *
+     * @param string $output
+     * @return $this
+     */
+    public function setOutput($output)
+    {
+        $this->output = $output;
+        return $this;
+    }
+
+    /**
+     * Get Output
+     *
+     * @return string
+     */
+    public function getOutput()
+    {
+        return $this->output;
+    }
+
+    /**
+     * Set Phase
+     *
+     * @param string $phase
+     * @return $this
+     */
+    public function setPhase($phase)
+    {
+        $this->phase = $phase;
+        return $this;
+    }
+
+    /**
+     * Get Phase
+     *
+     * @return string
+     */
+    public function getPhase()
+    {
+        return $this->phase;
     }
 
 }
