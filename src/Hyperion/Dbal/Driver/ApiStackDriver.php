@@ -38,7 +38,7 @@ class ApiStackDriver implements StackDriverInterface
     public function build($env, $name, $tag_string)
     {
         return $this->call(
-            'GET',
+            'POST',
             'build/'.(int)$env,
             ['name' => $name, 'tags' => $tag_string],
             'Hyperion\Dbal\Reports\BuildReport'

@@ -11,6 +11,7 @@ use Eloquent\Enumeration\AbstractEnumeration;
  * @method static DistributionStatus TERMINATING()
  * @method static DistributionStatus FROZEN()
  * @method static DistributionStatus TERMINATED()
+ * @method static DistributionStatus FAILED()
  */
 final class DistributionStatus extends AbstractEnumeration
 {
@@ -21,5 +22,6 @@ final class DistributionStatus extends AbstractEnumeration
     const TERMINATING = 4;
     const FROZEN      = 5;
     const TERMINATED  = 6;
+    const FAILED      = 7;
 }
  

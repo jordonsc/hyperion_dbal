@@ -49,10 +49,8 @@ class ProjectBuildCommand extends DbalCommand
         $output->writeln("<comment>Build Name:</comment> <info>".$name."</info>");
         $output->writeln("<comment>Tag String:</comment> <info>".$tag_string."</info>");
 
-        return;
-
         try {
-            $report = $this->getStackManager()->build($input->getArgument('environment'));
+            $report = $this->getStackManager()->build($input->getArgument('environment'), $name, $tag_string);
             $output->writeln("Build started, action: <comment>".$report->getAction()."</comment>");
         } catch (NotFoundException $e) {
             $output->writeln("<error>Invalid environment ID</error>");

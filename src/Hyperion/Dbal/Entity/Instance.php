@@ -13,21 +13,10 @@ class Instance extends HyperionEntity
     protected $instance_id;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    protected $instance_name;
-
-    /**
      * @Serializer\Type("integer")
      * @var int
      */
     protected $distribution;
-
-    /**
-     * @Serializer\Type("integer")
-     * @var int
-     */
-    protected $state;
 
     // --
 
@@ -74,51 +63,6 @@ class Instance extends HyperionEntity
     {
         return $this->instance_id;
     }
-
-    /**
-     * Set InstanceName
-     *
-     * @param mixed $instance_name
-     * @return $this
-     */
-    public function setInstanceName($instance_name)
-    {
-        $this->instance_name = $instance_name;
-        return $this;
-    }
-
-    /**
-     * Get InstanceName
-     *
-     * @return mixed
-     */
-    public function getInstanceName()
-    {
-        return $this->instance_name;
-    }
-
-    /**
-     * Set State
-     *
-     * @param InstanceState $state
-     * @return $this
-     */
-    public function setState(InstanceState $state)
-    {
-        $this->state = $state->value();
-        return $this;
-    }
-
-    /**
-     * Get State
-     *
-     * @return InstanceState
-     */
-    public function getState()
-    {
-        return InstanceState::memberByValue($this->state);
-    }
-
 
     public function __toString()
     {
