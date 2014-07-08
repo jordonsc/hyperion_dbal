@@ -19,6 +19,12 @@ class Repository extends HyperionEntity
     protected $project;
 
     /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $name;
+
+    /**
      * @Serializer\Type("integer")
      * @var int
      */
@@ -316,9 +322,31 @@ class Repository extends HyperionEntity
         return $this->username;
     }
 
+    /**
+     * Set Name
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get Name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
     public function __toString()
     {
-        return $this->getUrl();
+        return $this->getName();
     }
 
 }

@@ -22,6 +22,18 @@ class Distribution extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
+    protected $version;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $tag_string;
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
     protected $status;
 
     // --
@@ -92,5 +104,48 @@ class Distribution extends HyperionEntity
         return $this->environment;
     }
 
+    /**
+     * Set TagString
+     *
+     * @param string $tag_string
+     * @return $this
+     */
+    public function setTagString($tag_string)
+    {
+        $this->tag_string = $tag_string;
+        return $this;
+    }
+
+    /**
+     * Get TagString
+     *
+     * @return string
+     */
+    public function getTagString()
+    {
+        return $this->tag_string;
+    }
+
+    /**
+     * Set Version
+     *
+     * @param int $version
+     * @return $this
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+        return $this;
+    }
+
+    /**
+     * Get Version
+     *
+     * @return int
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
 
 }
