@@ -2,6 +2,7 @@
 namespace Hyperion\Dbal\Driver;
 
 use Hyperion\Dbal\Reports\BakeReport;
+use Hyperion\Dbal\Reports\BuildReport;
 
 interface StackDriverInterface
 {
@@ -13,7 +14,15 @@ interface StackDriverInterface
      */
     public function bake($env);
 
-    public function build($env);
+    /**
+     * Build a test environment
+     *
+     * @param int $env
+     * @param string $name
+     * @param string $tag_string
+     * @return BuildReport
+     */
+    public function build($env, $name, $tag_string);
 
     public function deploy($env);
 

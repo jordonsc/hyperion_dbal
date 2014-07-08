@@ -2,8 +2,6 @@
 namespace Hyperion\Dbal\Console\Command\Project;
 
 use Hyperion\Dbal\Console\Command\DbalCommand;
-use Hyperion\Dbal\Entity\Environment;
-use Hyperion\Dbal\Enum\Entity;
 use Hyperion\Dbal\Exception\NotFoundException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

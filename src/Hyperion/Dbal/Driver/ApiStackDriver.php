@@ -2,6 +2,7 @@
 namespace Hyperion\Dbal\Driver;
 
 use Hyperion\Dbal\Reports\BakeReport;
+use Hyperion\Dbal\Reports\BuildReport;
 
 /**
  * API driver for stack management
@@ -26,9 +27,22 @@ class ApiStackDriver implements StackDriverInterface
         );
     }
 
-    public function build($env)
+    /**
+     * Build a test environment
+     *
+     * @param int $env
+     * @param string $name
+     * @param string $tag_string
+     * @return BuildReport
+     */
+    public function build($env, $name, $tag_string)
     {
-        // TODO: Implement build() method.
+        return $this->call(
+            'GET',
+            'build/'.(int)$env,
+            ['name' => $name, 'tags' => $tag_string],
+            'Hyperion\Dbal\Reports\BuildReport'
+        );
     }
 
     public function deploy($env)

@@ -4,7 +4,10 @@ namespace Hyperion\Dbal;
 
 use Hyperion\Dbal\Driver\StackDriverInterface;
 use Hyperion\Dbal\Entity\Environment;
+use Hyperion\Dbal\Exception\ParseException;
 use Hyperion\Dbal\Reports\BakeReport;
+use Hyperion\Dbal\Reports\BuildReport;
+use Hyperion\Dbal\Utility\TagStringHelper;
 
 /**
  * The StackManager is responsible for controlling the application infrastructure stack
@@ -34,13 +37,18 @@ class StackManager
     }
 
     /**
-     * Perform a CI build
+     * Build a test environment
      *
      * @param int $env
+     * @param string $name
+     * @param string $tag_string
+     * @return BuildReport
+     * @throws ParseException
      */
-    public function build($env)
+    public function build($env, $name, $tag_string)
     {
-
+        $helper = new TagStringHelper();
+        return $this->driver->build($env, $name, $helper->cleanTagString($tag_string));
     }
 
     /**
