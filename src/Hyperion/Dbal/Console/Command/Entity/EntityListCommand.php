@@ -15,7 +15,7 @@ class EntityListCommand extends DbalCommand
 
     protected function configure()
     {
-        $this->setName('entity:list')->setDescription('Retrieve an entity')
+        $this->setName('entity:list')->setDescription('List all entities')
             ->addArgument('entity', InputArgument::REQUIRED)
             ->addOption('full', 'f', InputOption::VALUE_NONE);
     }
