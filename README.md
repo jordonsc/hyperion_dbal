@@ -6,7 +6,8 @@ Hyperion logistics and API client.
 Command Line
 ------------
 To view all command line options:
-`./hyperion`
+
+    ./hyperion
 
 Configuration
 -------------

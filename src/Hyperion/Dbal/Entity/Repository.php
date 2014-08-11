@@ -13,12 +13,6 @@ class Repository extends HyperionEntity
     protected $account;
 
     /**
-     * @Serializer\Type("integer")
-     * @var int
-     */
-    protected $project;
-
-    /**
      * @Serializer\Type("string")
      * @var string
      */
@@ -100,28 +94,6 @@ class Repository extends HyperionEntity
     public function getAccount()
     {
         return $this->account;
-    }
-
-    /**
-     * Set Project
-     *
-     * @param int $project
-     * @return $this
-     */
-    public function setProject($project)
-    {
-        $this->project = $project;
-        return $this;
-    }
-
-    /**
-     * Get Project
-     *
-     * @return int
-     */
-    public function getProject()
-    {
-        return $this->project;
     }
 
     /**

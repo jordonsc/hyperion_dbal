@@ -13,6 +13,12 @@ class Proxy extends HyperionEntity
     protected $account;
 
     /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $name;
+
+    /**
      * @Serializer\Type("integer")
      * @var int
      */
@@ -167,6 +173,28 @@ class Proxy extends HyperionEntity
     }
 
     /**
+     * Set Name
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get Name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Get Account
      *
      * @return int
@@ -178,7 +206,7 @@ class Proxy extends HyperionEntity
 
     public function __toString()
     {
-        return $this->getHostname().":".$this->getPort();
+        return $this->getName();
     }
 
 }

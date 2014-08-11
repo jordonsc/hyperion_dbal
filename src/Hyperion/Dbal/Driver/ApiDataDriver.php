@@ -1,6 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Driver;
 
+use Guzzle\Http\Message\Response;
 use Hyperion\Dbal\Collection\CriteriaCollection;
 use Hyperion\Dbal\Collection\EntityCollection;
 use Hyperion\Dbal\Entity\HyperionEntity;
@@ -96,7 +97,7 @@ class ApiDataDriver implements DataDriverInterface
     /**
      * Get all entities
      *
-     * @param Entity             $entity
+     * @param Entity $entity
      * @return EntityCollection
      */
     public function retrieveAll(Entity $entity)
@@ -111,4 +112,66 @@ class ApiDataDriver implements DataDriverInterface
         return new EntityCollection($r);
     }
 
+
+    /**
+     * Get all related entities
+     *
+     * @param HyperionEntity $entity
+     * @param Entity         $related
+     * @return EntityCollection
+     */
+    public function getRelatedEntities(HyperionEntity $entity, Entity $related)
+    {
+        $r = $this->call(
+            'GET',
+            $this->crud_prefix.$entity::getEntityName().'/'.$entity->getId().'/'.
+            call_user_func($related->value().'::getEntityName'),
+            null,
+            'ArrayCollection<'.$related->value().'>'
+        );
+
+        return new EntityCollection($r);
+    }
+
+    /**
+     * Add a relationship
+     *
+     * @param HyperionEntity $entity
+     * @param HyperionEntity $related
+     * @return bool
+     */
+    public function addRelationship(HyperionEntity $entity, HyperionEntity $related)
+    {
+        /** @var Response $r */
+        $r = $this->call(
+            'PUT',
+            $this->crud_prefix.$entity::getEntityName().'/'.$entity->getId().'/'.
+            $related::getEntityName().'/'.$related->getId(),
+            null,
+            null
+        );
+
+        return $r->getStatusCode() == 200;
+    }
+
+    /**
+     * Remove a relationship
+     *
+     * @param HyperionEntity $entity
+     * @param HyperionEntity $related
+     * @return EntityCollection
+     */
+    public function removeRelationship(HyperionEntity $entity, HyperionEntity $related)
+    {
+        /** @var Response $r */
+        $r = $this->call(
+            'DELETE',
+            $this->crud_prefix.$entity::getEntityName().'/'.$entity->getId().'/'.
+            $related::getEntityName().'/'.$related->getId(),
+            null,
+            null
+        );
+
+        return $r->getStatusCode() == 200;
+    }
 }

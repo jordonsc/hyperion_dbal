@@ -13,6 +13,12 @@ class Credential extends HyperionEntity
     protected $account;
 
     /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $name;
+
+    /**
      * @Serializer\Type("integer")
      * @var int
      */
@@ -148,10 +154,31 @@ class Credential extends HyperionEntity
         return $this->account;
     }
 
+    /**
+     * Set Name
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Get Name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
     public function __toString()
     {
-        return $this->getProvider()->key().": ".$this->getRegion();
+        return $this->getName();
     }
 
 }

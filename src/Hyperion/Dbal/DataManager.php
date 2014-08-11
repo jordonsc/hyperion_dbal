@@ -88,5 +88,42 @@ class DataManager
         return $this->driver->search($entity, $criteria);
     }
 
+    /**
+     * Get all related entities
+     *
+     * @param HyperionEntity $entity
+     * @param Entity         $related
+     * @return EntityCollection
+     */
+    public function getRelatedEntities(HyperionEntity $entity, Entity $related)
+    {
+        return $this->driver->getRelatedEntities($entity, $related);
+    }
+
+    /**
+     * Add a relationship
+     *
+     * @param HyperionEntity $entity
+     * @param HyperionEntity $related
+     * @return bool
+     */
+    public function addRelationship(HyperionEntity $entity, HyperionEntity $related)
+    {
+        return $this->driver->addRelationship($entity, $related);
+    }
+
+    /**
+     * Remove a relationship
+     *
+     * @param HyperionEntity $entity
+     * @param HyperionEntity $related
+     * @return bool
+     */
+    public function removeRelationship(HyperionEntity $entity, HyperionEntity $related)
+    {
+        return $this->driver->removeRelationship($entity, $related);
+    }
+
+
 
 } 

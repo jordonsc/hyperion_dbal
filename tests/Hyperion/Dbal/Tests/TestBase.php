@@ -8,8 +8,10 @@ use Hyperion\Dbal\Driver\ApiStackDriver;
 use Hyperion\Dbal\Entity\Account;
 use Hyperion\Dbal\Entity\Credential;
 use Hyperion\Dbal\Entity\Project;
+use Hyperion\Dbal\Entity\Repository;
 use Hyperion\Dbal\Enum\Packager;
 use Hyperion\Dbal\Enum\Provider;
+use Hyperion\Dbal\Enum\RepositoryType;
 use Hyperion\Dbal\StackManager;
 
 /**
@@ -64,14 +66,37 @@ abstract class TestBase extends \PHPUnit_Framework_TestCase
         return $entity;
     }
 
-    protected function createCredentials()
+    /**
+     * Sample credentials
+     *
+     * @param string $name
+     * @return Credential
+     */
+    protected function createCredentials($name)
     {
         $credentials = new Credential();
+        $credentials->setName($name);
         $credentials->setProvider(Provider::memberByKey(Conf::get('account.provider')));
         $credentials->setAccessKey(Conf::get('account.access_key'));
         $credentials->setSecret(Conf::get('account.secret'));
         $credentials->setRegion(Conf::get('account.region'));
         return $credentials;
+    }
+
+    /**
+     * Sample repository
+     *
+     * @param string $name
+     * @return Repository
+     */
+    protected function createRepository($name)
+    {
+        $repo = new Repository();
+        $repo->setName($name);
+        $repo->setType(RepositoryType::GIT());
+        $repo->setUrl("ssh://git@github.com:something.git");
+        $repo->setCheckoutDirectory('/tmp/something');
+        return $repo;
     }
 
 }

@@ -53,9 +53,36 @@ interface DataDriverInterface
     /**
      * Get all entities
      *
-     * @param Entity             $entity
+     * @param Entity $entity
      * @return EntityCollection
      */
     public function retrieveAll(Entity $entity);
+
+    /**
+     * Get all related entities
+     *
+     * @param HyperionEntity $entity
+     * @param Entity         $related
+     * @return EntityCollection
+     */
+    public function getRelatedEntities(HyperionEntity $entity, Entity $related);
+
+    /**
+     * Add a relationship
+     *
+     * @param HyperionEntity $entity
+     * @param HyperionEntity $related
+     * @return bool
+     */
+    public function addRelationship(HyperionEntity $entity, HyperionEntity $related);
+
+    /**
+     * Remove a relationship
+     *
+     * @param HyperionEntity $entity
+     * @param HyperionEntity $related
+     * @return bool
+     */
+    public function removeRelationship(HyperionEntity $entity, HyperionEntity $related);
 
 }
