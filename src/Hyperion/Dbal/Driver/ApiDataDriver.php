@@ -151,7 +151,7 @@ class ApiDataDriver implements DataDriverInterface
             null
         );
 
-        return $r->getStatusCode() == 200;
+        return $r->getStatusCode() >= 200 && $r->getStatusCode() < 300;
     }
 
     /**
@@ -172,6 +172,6 @@ class ApiDataDriver implements DataDriverInterface
             null
         );
 
-        return $r->getStatusCode() == 200;
+        return $r->getStatusCode() >= 200 && $r->getStatusCode() < 300;
     }
 }

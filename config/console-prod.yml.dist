@@ -1,7 +1,7 @@
 data_manager:
     driver: Hyperion\Dbal\Driver\ApiDataDriver
-    arguments: [ null ]
+    arguments: [ 'hyperion.local' ]
 
 stack_manager:
     driver: Hyperion\Dbal\Driver\ApiStackDriver
-    arguments: [ null ]
+    arguments: [ 'hyperion.local' ]
