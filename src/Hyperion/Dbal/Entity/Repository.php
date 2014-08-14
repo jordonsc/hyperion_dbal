@@ -70,7 +70,7 @@ class Repository extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
-    protected $proxy_id;
+    protected $proxy;
 
     // --
 
@@ -141,25 +141,25 @@ class Repository extends HyperionEntity
     }
 
     /**
-     * Set ProxyId
+     * Set proxy ID
      *
      * @param int $proxy_id
      * @return $this
      */
-    public function setProxyId($proxy_id)
+    public function setProxy($proxy_id)
     {
-        $this->proxy_id = $proxy_id;
+        $this->proxy = $proxy_id;
         return $this;
     }
 
     /**
-     * Get ProxyId
+     * Get proxy ID
      *
      * @return int
      */
-    public function getProxyId()
+    public function getProxy()
     {
-        return $this->proxy_id;
+        return $this->proxy;
     }
 
     /**
