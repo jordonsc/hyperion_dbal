@@ -2,6 +2,14 @@
     "name": "hyperion/dbal",
     "type": "library",
     "description": "Hyperion DBAL and API client",
+    "keywords": ["hyperion dbal", "hyperion", "api client"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jordon Scott",
+            "email": "jordon@novatek.com.au"
+        }
+    ],
     "autoload": {
         "psr-0": { "": ["src/", "tests/"] }
     },
