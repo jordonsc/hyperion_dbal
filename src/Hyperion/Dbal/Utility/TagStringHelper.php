@@ -5,7 +5,13 @@ use Hyperion\Dbal\Exception\ParseException;
 
 class TagStringHelper
 {
-    const REPO_FILTER = '/^[\w-\.,\\/\+\|]{2,50}$/';
+    // For name-base repo matching (deprecated):
+    //const REPO_FILTER = '/^[\w-\.,\\/\+\|]{2,50}$/';
+
+    // For ID-based repo matching:
+    const REPO_FILTER = '/^[0-9]{1,20}$/';
+
+    // Tag names
     const TAG_FILTER  = '/^[\w-\.,\\/\+\|]{2,200}$/';
 
 
@@ -134,4 +140,4 @@ class TagStringHelper
     }
 
 
-} 
+}

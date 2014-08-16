@@ -40,19 +40,19 @@ class TagStringHelperTest extends \PHPUnit_Framework_TestCase {
 
     public function stringDataProvider() {
         return [
-            ['stuff=stuff', 1, true],
-            ['stuff=stuff stuff=feature/blah', 1, true],
-            ['stuff=stuff more=stuff', 2, true],
-            ['repo=feature/feature-name', 1, true],
-            ['stuff=stuff repo=', 0, false],
-            ['stuff=stuff  repo=blah', 2, true],
-            ['stuff=stuff repo=blahh heck', 0, false],
-            ['stuff=x', 0, false],
-            ['stuff=!crap!', 0, false],
-            [' hello=feature/world', 1, true],
-            [' hello=feature/world ', 1, true],
-            [' hello=feature/world ', 1, true],
-            ['x=y', 0, false],
+            ['23=stuff', 1, true],
+            ['45=stuff 45=feature/blah', 1, true],
+            ['342=stuff 435=stuff', 2, true],
+            ['342=feature/feature-name', 1, true],
+            ['32=stuff 1=', 0, false],
+            ['32=stuff  2=blah', 2, true],
+            ['32=stuff 3=blahh heck', 0, false],
+            ['1=x', 0, false],
+            ['1=!crap!', 0, false],
+            [' 1=feature/world', 1, true],
+            [' 1=feature/world ', 1, true],
+            [' 1=feature/world ', 1, true],
+            ['1=y', 0, false],
             ['  ', 0, true],
         ];
     }
