@@ -8,6 +8,8 @@ use Hyperion\Dbal\Console\Command\Entity\EntityRetrieveCommand;
 use Hyperion\Dbal\Console\Command\Project\ProjectBakeCommand;
 use Hyperion\Dbal\Console\Command\Project\ProjectBuildCommand;
 use Hyperion\Dbal\Console\Command\Project\ProjectDescribeCommand;
+use Hyperion\Dbal\Console\Command\Project\ProjectTeardownCommand;
+use Hyperion\Dbal\Console\Command\Project\ProjectTeardownOtherCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -65,6 +67,8 @@ class DbalApplication extends Application
         $this->add(new ProjectDescribeCommand());
         $this->add(new ProjectBakeCommand());
         $this->add(new ProjectBuildCommand());
+        $this->add(new ProjectTeardownCommand());
+        $this->add(new ProjectTeardownOtherCommand());
 
     }
 

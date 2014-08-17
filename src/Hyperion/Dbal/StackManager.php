@@ -5,8 +5,10 @@ namespace Hyperion\Dbal;
 use Hyperion\Dbal\Driver\StackDriverInterface;
 use Hyperion\Dbal\Entity\Environment;
 use Hyperion\Dbal\Exception\ParseException;
+use Hyperion\Dbal\Reports\ActionReport;
 use Hyperion\Dbal\Reports\BakeReport;
 use Hyperion\Dbal\Reports\BuildReport;
+use Hyperion\Dbal\Reports\MultiActionReport;
 use Hyperion\Dbal\Utility\TagStringHelper;
 
 /**
@@ -29,7 +31,7 @@ class StackManager
      * Bake a project using given environment
      *
      * @param int $env
-     * @return BakeReport
+     * @return ActionReport
      */
     public function bake($env)
     {
@@ -39,10 +41,10 @@ class StackManager
     /**
      * Build a test environment
      *
-     * @param int $env
+     * @param int    $env
      * @param string $name
      * @param string $tag_string
-     * @return BuildReport
+     * @return ActionReport
      * @throws ParseException
      */
     public function build($env, $name, $tag_string)
@@ -52,34 +54,50 @@ class StackManager
     }
 
     /**
-     * Release/deploy a project
+     * Release/deploy an environment
      *
      * @param int $env
+     * @return ActionReport
      */
     public function deploy($env)
     {
-
+        return $this->driver->deploy($env);
     }
 
     /**
-     * Horizontally scale a deployed project
+     * Horizontally scale a distribution
      *
      * @param int $env
      * @param int $delta
+     * @return ActionReport
      */
     public function scale($env, $delta)
     {
+        return $this->driver->scale($env, $delta);
+    }
 
+
+    /**
+     * Tear down distribution
+     *
+     * @param int $distribution
+     * @return ActionReport
+     */
+    public function tearDown($distribution)
+    {
+        return $this->driver->tearDown($distribution);
     }
 
     /**
-     * Completely tear-down a project
+     * Tear down all other distributions with the same name and environment
      *
-     * @param int $env
+     * @param int $distribution
+     * @return MultiActionReport
      */
-    public function tearDown(Environment $env)
+    public function tearDownOther($distribution)
     {
-
+        return $this->driver->tearDownOther($distribution);
     }
+
 
 } 

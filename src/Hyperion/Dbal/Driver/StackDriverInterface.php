@@ -1,8 +1,8 @@
 <?php
 namespace Hyperion\Dbal\Driver;
 
-use Hyperion\Dbal\Reports\BakeReport;
-use Hyperion\Dbal\Reports\BuildReport;
+use Hyperion\Dbal\Reports\ActionReport;
+use Hyperion\Dbal\Reports\MultiActionReport;
 
 interface StackDriverInterface
 {
@@ -10,7 +10,7 @@ interface StackDriverInterface
      * Bake a project
      *
      * @param int $env
-     * @return BakeReport
+     * @return ActionReport
      */
     public function bake($env);
 
@@ -20,15 +20,41 @@ interface StackDriverInterface
      * @param int $env
      * @param string $name
      * @param string $tag_string
-     * @return BuildReport
+     * @return ActionReport
      */
     public function build($env, $name, $tag_string);
 
+    /**
+     * Deploy an environment
+     *
+     * @param $env
+     * @return ActionReport
+     */
     public function deploy($env);
 
-    public function scale($env, $delta);
+    /**
+     * Horizontally scale a distribution
+     *
+     * @param int $distribution
+     * @param int $delta
+     * @return ActionReport
+     */
+    public function scale($distribution, $delta);
 
-    public function tearDown($env);
+    /**
+     * Tear down distribution
+     *
+     * @param int $distribution
+     * @return ActionReport
+     */
+    public function tearDown($distribution);
 
-    // TODO: add some status getters
+    /**
+     * Tear down all other distributions with the same name and environment
+     *
+     * @param int $distribution
+     * @return MultiActionReport
+     */
+    public function tearDownOther($distribution);
+
 }
