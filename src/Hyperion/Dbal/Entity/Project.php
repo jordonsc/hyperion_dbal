@@ -58,14 +58,6 @@ class Project extends HyperionEntity
     protected $packages;
 
     /**
-     * JSON array
-     * @Serializer\Type("string")
-     *
-     * @var string
-     */
-    protected $zones;
-
-    /**
      * @Serializer\Type("string")
      * @var string
      */
@@ -312,28 +304,6 @@ class Project extends HyperionEntity
     public function getAccount()
     {
         return $this->account;
-    }
-
-    /**
-     * Set the zones this application will deploy in
-     *
-     * @param string[] $zones
-     * @return $this
-     */
-    public function setZones($zones)
-    {
-        $this->zones = json_encode($zones);
-        return $this;
-    }
-
-    /**
-     * Get the zones this application will deploy in
-     *
-     * @return string[]
-     */
-    public function getZones()
-    {
-        return json_decode($this->zones);
     }
 
     /**

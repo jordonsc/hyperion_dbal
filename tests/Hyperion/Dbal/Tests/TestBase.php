@@ -62,7 +62,6 @@ abstract class TestBase extends \PHPUnit_Framework_TestCase
         $entity->setUpdateSystemPackages(true);
         $entity->setPackages(['httpd', 'php']);
         $entity->setServices(['httpd']);
-        $entity->setZones(['ap-southeast-2a', 'ap-southeast-2b']);
         return $entity;
     }
 

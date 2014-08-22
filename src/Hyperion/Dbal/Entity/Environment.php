@@ -38,10 +38,12 @@ class Environment extends HyperionEntity
     protected $instance_size;
 
     /**
+     * JSON array
      * @Serializer\Type("string")
+     *
      * @var string
      */
-    protected $network;
+    protected $zones;
 
     /**
      * JSON array
@@ -245,25 +247,25 @@ class Environment extends HyperionEntity
     }
 
     /**
-     * Set Network
+     * Set the zones/subnets this application will deploy in
      *
-     * @param string $network
+     * @param string[] $zones
      * @return $this
      */
-    public function setNetwork($network)
+    public function setZones($zones)
     {
-        $this->network = $network;
+        $this->zones = json_encode($zones);
         return $this;
     }
 
     /**
-     * Get Network
+     * Get the zones/subnets this application will deploy in
      *
-     * @return string
+     * @return string[]
      */
-    public function getNetwork()
+    public function getZones()
     {
-        return $this->network;
+        return json_decode($this->zones);
     }
 
     /**
