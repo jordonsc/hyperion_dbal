@@ -91,6 +91,12 @@ class Environment extends HyperionEntity
      * @Serializer\Type("integer")
      * @var int
      */
+    protected $private_network;
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
     protected $ssh_port;
 
     /**
@@ -466,6 +472,27 @@ class Environment extends HyperionEntity
         return $this->ssh_user;
     }
 
+    /**
+     * Set private network flag
+     *
+     * @param bool $is_private
+     * @return $this
+     */
+    public function setPrivateNetwork($is_private)
+    {
+        $this->private_network = $is_private ? 1 : 0;
+        return $this;
+    }
+
+    /**
+     * Get private network flag
+     *
+     * @return bool
+     */
+    public function getPrivateNetwork()
+    {
+        return (bool)$this->private_network;
+    }
 
     public function __toString()
     {
