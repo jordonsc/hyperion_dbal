@@ -117,8 +117,25 @@ class Environment extends HyperionEntity
      */
     protected $ssh_pkey;
 
-    // --
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $dns_zone;
 
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $dns_name;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $dns_ttl;
+
+    // --
 
     /**
      * Set Credential
@@ -493,6 +510,73 @@ class Environment extends HyperionEntity
     {
         return (bool)$this->private_network;
     }
+
+    /**
+     * Set the DNS subdomain
+     *
+     * @param string $dns_name
+     * @return $this
+     */
+    public function setDnsName($dns_name)
+    {
+        $this->dns_name = $dns_name;
+        return $this;
+    }
+
+    /**
+     * Get the DNS subdomain
+     *
+     * @return string
+     */
+    public function getDnsName()
+    {
+        return $this->dns_name;
+    }
+
+    /**
+     * Set DNS TTL in seconds
+     *
+     * @param string $dns_ttl
+     * @return $this
+     */
+    public function setDnsTtl($dns_ttl)
+    {
+        $this->dns_ttl = $dns_ttl;
+        return $this;
+    }
+
+    /**
+     * Get DNS TTL in seconds
+     *
+     * @return int
+     */
+    public function getDnsTtl()
+    {
+        return $this->dns_ttl;
+    }
+
+    /**
+     * Set the DNS zone
+     *
+     * @param int $dns_zone
+     * @return $this
+     */
+    public function setDnsZone($dns_zone)
+    {
+        $this->dns_zone = $dns_zone;
+        return $this;
+    }
+
+    /**
+     * Get the DNS zone
+     *
+     * @return string
+     */
+    public function getDnsZone()
+    {
+        return $this->dns_zone;
+    }
+
 
     public function __toString()
     {
