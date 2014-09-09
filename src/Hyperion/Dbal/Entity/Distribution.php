@@ -31,6 +31,12 @@ class Distribution extends HyperionEntity
     protected $tag_string;
 
     /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $dns;
+
+    /**
      * @Serializer\Type("integer")
      * @var int
      */
@@ -146,6 +152,28 @@ class Distribution extends HyperionEntity
     public function getVersion()
     {
         return $this->version;
+    }
+
+    /**
+     * Set Dns
+     *
+     * @param string $dns
+     * @return $this
+     */
+    public function setDns($dns)
+    {
+        $this->dns = $dns;
+        return $this;
+    }
+
+    /**
+     * Get Dns
+     *
+     * @return string
+     */
+    public function getDns()
+    {
+        return $this->dns;
     }
 
 }
