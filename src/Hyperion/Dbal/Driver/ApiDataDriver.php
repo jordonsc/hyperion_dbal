@@ -39,7 +39,7 @@ class ApiDataDriver implements DataDriverInterface
      */
     public function retrieve(Entity $entity, $id)
     {
-        $entity_name = call_user_func($entity->value().'::getEntityName');
+        $entity_name = call_user_func((string)$entity->value().'::getEntityName');
 
         return $this->call(
             'GET',
@@ -86,9 +86,9 @@ class ApiDataDriver implements DataDriverInterface
     {
         $r = $this->call(
             'POST',
-            $this->crud_prefix.call_user_func($entity->value().'::getEntityName').'/search',
+            $this->crud_prefix.call_user_func((string)$entity->value().'::getEntityName').'/search',
             $criteria ? $criteria->getItems() : null,
-            'ArrayCollection<'.$entity->value().'>'
+            'ArrayCollection<'.(string)$entity->value().'>'
         );
 
         return new EntityCollection($r);
@@ -104,9 +104,9 @@ class ApiDataDriver implements DataDriverInterface
     {
         $r = $this->call(
             'GET',
-            $this->crud_prefix.call_user_func($entity->value().'::getEntityName').'/all',
+            $this->crud_prefix.call_user_func((string)$entity->value().'::getEntityName').'/all',
             null,
-            'ArrayCollection<'.$entity->value().'>'
+            'ArrayCollection<'.(string)$entity->value().'>'
         );
 
         return new EntityCollection($r);
@@ -125,9 +125,9 @@ class ApiDataDriver implements DataDriverInterface
         $r = $this->call(
             'GET',
             $this->crud_prefix.$entity::getEntityName().'/'.$entity->getId().'/'.
-            call_user_func($related->value().'::getEntityName'),
+            call_user_func((string)$related->value().'::getEntityName'),
             null,
-            'ArrayCollection<'.$related->value().'>'
+            'ArrayCollection<'.(string)$related->value().'>'
         );
 
         return new EntityCollection($r);

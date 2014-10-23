@@ -13,9 +13,6 @@ foreach ([__DIR__.'/../../autoload.php', __DIR__.'/vendor/autoload.php'] as $fil
 
 use Hyperion\Dbal\Console\DbalApplication;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
-use Symfony\Component\Console\Input\InputOption;
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(['--env', '-e'], 'dev');
