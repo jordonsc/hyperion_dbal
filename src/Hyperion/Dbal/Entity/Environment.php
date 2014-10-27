@@ -1,6 +1,7 @@
 <?php
 namespace Hyperion\Dbal\Entity;
 
+use Hyperion\Dbal\Enum\DeployStrategy;
 use Hyperion\Dbal\Enum\EnvironmentType;
 use Hyperion\Dbal\Enum\Tenancy;
 use JMS\Serializer\Annotation as Serializer;
@@ -70,6 +71,14 @@ class Environment extends HyperionEntity
     protected $tags;
 
     /**
+     * JSON array
+     * @Serializer\Type("string")
+     *
+     * @var string
+     */
+    protected $load_balancers;
+
+    /**
      * @Serializer\Type("integer")
      * @var int
      */
@@ -134,6 +143,49 @@ class Environment extends HyperionEntity
      * @var string
      */
     protected $dns_ttl;
+
+
+    // -- Production-specific
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
+    protected $strategy;
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
+    protected $min_instances;
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
+    protected $max_instances;
+
+    /**
+     * @Serializer\Type("integer")
+     * @var int
+     */
+    protected $desired_capacity;
+
+    /**
+     * Time in seconds between scaling actions
+     *
+     * @Serializer\Type("integer")
+     * @var int
+     */
+    protected $scale_cooldown;
+
+    /**
+     * Time in seconds between an instance being green and considered 'online'
+     *
+     * @Serializer\Type("integer")
+     * @var int
+     */
+    protected $health_check_grace_period;
 
     // --
 
@@ -577,10 +629,162 @@ class Environment extends HyperionEntity
         return $this->dns_zone;
     }
 
+    /**
+     * Get DesiredCapacity
+     *
+     * @return mixed
+     */
+    public function getDesiredCapacity()
+    {
+        return $this->desired_capacity;
+    }
+
+    /**
+     * Set DesiredCapacity
+     *
+     * @param mixed $desired_capacity
+     * @return $this
+     */
+    public function setDesiredCapacity($desired_capacity)
+    {
+        $this->desired_capacity = $desired_capacity;
+        return $this;
+    }
+
+    /**
+     * Get HealthCheckGracePeriod
+     *
+     * @return mixed
+     */
+    public function getHealthCheckGracePeriod()
+    {
+        return $this->health_check_grace_period;
+    }
+
+    /**
+     * Set HealthCheckGracePeriod
+     *
+     * @param mixed $health_check_grace_period
+     * @return $this
+     */
+    public function setHealthCheckGracePeriod($health_check_grace_period)
+    {
+        $this->health_check_grace_period = $health_check_grace_period;
+        return $this;
+    }
+
+    /**
+     * Get LoadBalancers
+     *
+     * @return string[]
+     */
+    public function getLoadBalancers()
+    {
+        return json_decode($this->load_balancers);
+    }
+
+    /**
+     * Set LoadBalancers
+     *
+     * @param string[] $load_balancers
+     * @return $this
+     */
+    public function setLoadBalancers(array $load_balancers)
+    {
+        $this->load_balancers = json_encode($load_balancers);
+        return $this;
+    }
+
+    /**
+     * Get MaxInstances
+     *
+     * @return mixed
+     */
+    public function getMaxInstances()
+    {
+        return $this->max_instances;
+    }
+
+    /**
+     * Set MaxInstances
+     *
+     * @param mixed $max_instances
+     * @return $this
+     */
+    public function setMaxInstances($max_instances)
+    {
+        $this->max_instances = $max_instances;
+        return $this;
+    }
+
+    /**
+     * Get MinInstances
+     *
+     * @return mixed
+     */
+    public function getMinInstances()
+    {
+        return $this->min_instances;
+    }
+
+    /**
+     * Set MinInstances
+     *
+     * @param mixed $min_instances
+     * @return $this
+     */
+    public function setMinInstances($min_instances)
+    {
+        $this->min_instances = $min_instances;
+        return $this;
+    }
+
+    /**
+     * Get ScaleCooldown
+     *
+     * @return mixed
+     */
+    public function getScaleCooldown()
+    {
+        return $this->scale_cooldown;
+    }
+
+    /**
+     * Set ScaleCooldown
+     *
+     * @param mixed $scale_cooldown
+     * @return $this
+     */
+    public function setScaleCooldown($scale_cooldown)
+    {
+        $this->scale_cooldown = $scale_cooldown;
+        return $this;
+    }
+
+    /**
+     * Get Strategy
+     *
+     * @return DeployStrategy
+     */
+    public function getStrategy()
+    {
+        return DeployStrategy::memberByValue($this->strategy);
+    }
+
+    /**
+     * Set Strategy
+     *
+     * @param DeployStrategy $strategy
+     * @return $this
+     */
+    public function setStrategy(DeployStrategy $strategy)
+    {
+        $this->strategy = $strategy->value();
+        return $this;
+    }
 
     public function __toString()
     {
         return $this->getName();
     }
-
 }

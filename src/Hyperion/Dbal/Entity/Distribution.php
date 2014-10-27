@@ -42,6 +42,18 @@ class Distribution extends HyperionEntity
      */
     protected $status;
 
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $asg;
+
+    /**
+     * @Serializer\Type("string")
+     * @var string
+     */
+    protected $image_id;
+
     // --
 
     /**
@@ -176,4 +188,47 @@ class Distribution extends HyperionEntity
         return $this->dns;
     }
 
+    /**
+     * Get Asg
+     *
+     * @return string
+     */
+    public function getAsg()
+    {
+        return $this->asg;
+    }
+
+    /**
+     * Set Asg
+     *
+     * @param string $asg
+     * @return $this
+     */
+    public function setAsg($asg)
+    {
+        $this->asg = $asg;
+        return $this;
+    }
+
+    /**
+     * Get ImageId
+     *
+     * @return string
+     */
+    public function getImageId()
+    {
+        return $this->image_id;
+    }
+
+    /**
+     * Set ImageId
+     *
+     * @param string $image_id
+     * @return $this
+     */
+    public function setImageId($image_id)
+    {
+        $this->image_id = $image_id;
+        return $this;
+    }
 }
